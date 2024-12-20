@@ -1,0 +1,135 @@
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #1c1c1c;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  header {
+    background-color: #2c2c2c;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+  }
+  
+  header h1 {
+    margin: 0;
+    font-size: 2rem;
+  }
+  
+  nav {
+    margin-top: 0.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+  
+  nav a {
+    color: #9ac7ff;
+    text-decoration: none;
+    font-size: 1rem;
+  }
+  
+  nav a:hover {
+    text-decoration: underline;
+  }
+  
+  main {
+    flex: 1;
+    padding: 1rem;
+  }
+  
+  /* User Info Section */
+  #user-info {
+    background-color: #2c2c2c;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+  
+  #user-info h2 {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    color: #9ac7ff;
+  }
+  
+  /* User Reviews Section */
+  #user-reviews {
+    margin-bottom: 2rem;
+  }
+  
+  #user-reviews h2 {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    color: #9ac7ff;
+  }
+  
+  #user-reviews ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  #user-reviews li {
+    background-color: #2c2c2c;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border-radius: 8px;
+  }
+  
+  /* User Favorites Section */
+  #user-favorites {
+    margin-bottom: 2rem;
+  }
+  
+  #user-favorites h2 {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    color: #9ac7ff;
+  }
+  
+  #user-favorites ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+  }
+  
+  #user-favorites li {
+    background-color: #2c2c2c;
+    padding: 1rem;
+    border-radius: 8px;
+    flex: 1 1 calc(33.333% - 1rem);
+    max-width: calc(33.333% - 1rem);
+    text-align: center;
+  }
+  
+  #user-favorites img {
+    max-width: 100%;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    #user-favorites li {
+      flex: 1 1 calc(50% - 1rem);
+      max-width: calc(50% - 1rem);
+    }
+  }
+  
+  @media (max-width: 480px) {
+    #user-favorites li {
+      flex: 1 1 100%;
+      max-width: 100%;
+    }
+  }
+  
