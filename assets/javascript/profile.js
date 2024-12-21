@@ -1,29 +1,14 @@
-const userInfoSection = document.getElementById('user-info');
-const userReviewsSection = document.getElementById('user-reviews');
-const userFavoritesSection = document.getElementById('user-favorites');
 const logoutButton = document.getElementById('logout');
 
-// Fetch and display user information
+// Fetch profile data (mocked for demonstration)
 fetch('/api/user/profile')
-  .then(response => response.json())
-  .then(data => {
-    userInfoSection.innerHTML = `
-      <p>Username: ${data.username}</p>
-      <p>Email: ${data.email}</p>
-      <p>Role: ${data.role}</p>
-    `;
-
-    userReviewsSection.innerHTML = data.reviews.map(review => `
-      <div>
-        <h3>${review.animeTitle}</h3>
-        <p>Rating: ${review.rating}</p>
-        <p>${review.content}</p>
-      </div>
-    `).join('');
-
-    userFavoritesSection.innerHTML = data.favorites.map(favorite => `
-      <div>${favorite.animeTitle}</div>
-    `).join('');
+  .then((response) => response.json())
+  .then((data) => {
+    document.querySelector('.username').textContent = data.username;
+    document.querySelector('.profile-pic').src = data.profilePic;
+    document.querySelector('.stat:nth-child(1) h2').textContent = data.filmsCount;
+    document.querySelector('.stat:nth-child(2) h2').textContent = data.followingCount;
+    document.querySelector('.stat:nth-child(3) h2').textContent = data.followersCount;
   });
 
 // Logout functionality

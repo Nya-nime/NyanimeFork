@@ -9,23 +9,41 @@
 </head>
 <body>
   <header>
-    <h1>Your Profile</h1>
-    <nav>
-      <a href="user_home.html">Home</a>
-      <a href="#" id="logout">Logout</a>
+    <nav class="navbar">
+      <div class="logo">
+        <img src="path/to/logo.png" alt="Logo" />
+        <span>Profile</span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="user_home.html">Home</a></li>
+        <li><a href="logout.html">Logout</a></li>
+        <li><a href="edit_profile.html">profile</a></li>
+      </ul>
     </nav>
   </header>
   <main>
-    <section id="user-info">
-      <!-- User information will be displayed here -->
-    </section>
-    <section id="user-reviews">
-      <h2>Your Reviews</h2>
-      <!-- User reviews will appear here -->
-    </section>
-    <section id="user-favorites">
-      <h2>Your Favorite Anime</h2>
-      <!-- Favorite anime list will appear here -->
+    <section class="profile-section">
+      <div class="profile-header">
+        <img src="path/to/profile-pic.jpg" alt="Profile Picture" class="profile-pic" />
+        <div class="profile-info">
+          <h1 class="username">Ferdy</h1>
+          <!-- <button class="edit-profile-btn">Edit Profile</button> -->
+        </div>
+      </div>
+      <div class="profile-stats">
+        <div class="stat">
+          <h2>5</h2>
+          <p>Films</p>
+        </div>
+        <div class="stat">
+          <h2>0</h2>
+          <p>Following</p>
+        </div>
+        <div class="stat">
+          <h2>0</h2>
+          <p>Followers</p>
+        </div>
+      </div>
     </section>
   </main>
 </body>

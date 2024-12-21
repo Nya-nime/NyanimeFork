@@ -1,0 +1,78 @@
+/* Reset and Global Styles */
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  /* Header Styling */
+  header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  header h1 {
+    font-size: 1.8rem;
+    color: #2c3e50;
+  }
+  
+  /* Main Container Styling */
+  .logout-container {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .logout-container a {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    margin: 0.5rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  /* Button Styles */
+  .logout-btn {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+  }
+  
+  .logout-btn:hover {
+    background-color: #c0392b;
+  }
+  
+  .cancel-btn {
+    background-color: #3498db;
+    color: white;
+    border: none;
+  }
+  
+  .cancel-btn:hover {
+    background-color: #2980b9;
+  }
+  
+  /* Responsive Design */
+  @media (min-width: 768px) {
+    header h1 {
+      font-size: 2.2rem;
+    }
+  
+    .logout-container {
+      padding: 3rem;
+    }
+  }
+  
