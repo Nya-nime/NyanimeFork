@@ -1,6 +1,6 @@
 const loginForm = document.getElementById('login-form');
 
-loginForm.addEventListener('submit', (event) => {
+loginForm.addEventListener('login', (event) => {
   event.preventDefault();
 
   const email = document.getElementById('email').value; // Ganti username dengan email
