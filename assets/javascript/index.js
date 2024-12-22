@@ -23,6 +23,6 @@ searchButton.addEventListener('click', () => {
 // Redirect to frontend when accessing the root
 window.onload = () => {
   if (window.location.href === 'http://localhost:8080/') {
-    window.location.href = 'https://nya-nime.github.io/Nyanime/';
+    window.location.href = 'http://127.0.0.1:5500/index.html';
   }
 };

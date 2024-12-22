@@ -18,3 +18,4 @@ logoutButton.addEventListener('click', () => {
       window.location.href = 'index.html';
     });
 });
+history.replaceState(null, null, window.location.href);
