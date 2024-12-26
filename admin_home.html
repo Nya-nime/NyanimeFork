@@ -15,21 +15,22 @@
     </nav>
   </header>
   <main>
-    <button id="add-anime-button">Add Anime</button>
-    <div class="hero" id="hero-section">
-        <form id="add-anime-form">
-            <label for="title">Title</label>
-            <input type="text" id="title" name="title" required>
-            <label for="description">Description</label>
-            <textarea id="description" name="description" required></textarea>
-            <label for="genre">Genre</label>
-            <input type="text" id="genre" name="genre" required>
-            <label for="release-date">Release Date</label>
-            <input type="date" id="release-date" name="release-date" required>
-            <button type="submit">Submit</button>
-            <button type="button" id="cancel-button">Cancel</button>
-        </form>
-    </div>
+    <div class="hero" id="hero-section" style="display: none;"> <!-- Pastikan ini disembunyikan secara default -->
+      <h2>Add Anime</h2>
+      <form id="add-anime-form">
+          <label for="title">Title</label>
+          <input type="text" id="title" name="title" required>
+          <label for="description">Description</label>
+          <textarea id="description" name="description" required></textarea>
+          <label for="genre">Genre</label>
+          <input type="text" id="genre" name="genre" required>
+          <label for="release-date">Release Date</label>
+          <input type="date" id="release-date" name="release-date" required>
+          <button type="submit">Submit</button>
+          <button type="button" id="cancel-button">Cancel</button>
+      </form>
+  </div>
+  <button id="add-anime-button">Add Anime</button>
     <section id="anime-list">
         <h2>Anime List</h2>
         <!-- Daftar anime akan muncul di sini -->

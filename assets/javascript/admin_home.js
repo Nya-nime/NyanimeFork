@@ -8,15 +8,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Tampilkan form penambahan anime
     addAnimeButton.addEventListener('click', () => {
+        console.log('Add Anime button clicked'); // Log ketika tombol diklik
         heroSection.style.display = 'block'; // Tampilkan hero section
+        addAnimeButton.style.display = 'none'; // Sembunyikan tombol "Add Anime"
     });
 
     // Sembunyikan form penambahan anime dan reset form
     cancelButton.addEventListener('click', () => {
         heroSection.style.display = 'none'; // Sembunyikan hero section
         addAnimeForm.reset(); // Reset form
-    });
-
+        addAnimeButton.style.display = 'block'; // Tampilkan kembali tombol "Add Anime"
+    }); 
     // Menangani pengiriman form penambahan anime
     addAnimeForm.addEventListener('submit', (event) => {
         event.preventDefault();
@@ -26,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const genre = document.getElementById('genre').value;
         const releaseDate = document.getElementById('release-date').value;
 
-        fetch('http://localhost:8080/api/anime', { // Ganti dengan URL lengkap
+        fetch('http://localhost:8080/anime', { // Ganti dengan URL lengkap
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -57,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const genre = prompt("Enter new genre:");
         const releaseDate = prompt("Enter new release date:");
 
-        fetch(`http://localhost:8080/api/anime/${id}`, { // Ganti dengan URL lengkap
+        fetch(`http://localhost:8080/anime/${id}`, { // Ganti dengan URL lengkap
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -80,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Fungsi untuk menghapus anime
     window.deleteAnime = function(id) {
-        fetch(`http://localhost:8080/api/anime/${id}`, { // Ganti dengan URL lengkap
+        fetch(`http://localhost:8080/anime/${id}`, { // Ganti dengan URL lengkap
             method: 'DELETE',
         })
         .then(response => {
