@@ -1,98 +1,172 @@
-/* Global Styles */
+/* General Styles */
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    background-color: #f4f4f4;
-    color: #333;
-  }
-  
-  header {
-    background-color: #34495e;
-    color: white;
-    padding: 1rem;
-    text-align: center;
-  }
-  
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f9;
+}
+
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header h1 {
+  margin: 0;
+}
+
+header nav {
+  display: flex;
+  align-items: center;
+}
+
+header nav input[type="text"] {
+  padding: 0.5rem;
+  border: none;
+  border-radius: 4px;
+  margin-right: 0.5rem;
+}
+
+header nav button {
+  background-color: #ff5757;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+header nav button:hover {
+  background-color: #e74c3c; /* Darker red on hover */
+}
+
+/* Main Section */
+main {
+  padding: 2rem;
+}
+
+#add-anime-button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+#add-anime-button:hover {
+  background-color: #218838; /* Darker green on hover */
+}
+
+.anime-list {
+  display: flex; /* Use flexbox for horizontal layout */
+  flex-wrap: wrap; /* Allow wrapping to the next line */
+  gap: 1rem; /* Space between cards */
+  justify-content: center; /* Center items on smaller screens */
+}
+
+.anime-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  width: calc(33.33% - 1rem); /* Set width to 1/3 of the container with reduced gap */
+  height: 300px; /* Fixed height for cards */
+  padding: 1rem;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.2s;
+  overflow: hidden; /* Ensure content doesn't overflow */
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+}
+
+.anime-card:hover {
+  transform: scale(1.02); /* Slightly enlarge on hover */
+}
+
+.anime-card h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.25rem;
+}
+
+.anime-card p {
+  margin: 0.25rem 0;
+  font-size: 0.9rem;
+  color: #555;
+  max-height: 100px; /* Limit height for description */
+  overflow-y: auto; /* Enable scrolling for long descriptions */
+}
+
+.anime-card p:nth-child(2), /* Genre */
+.anime-card p:nth-child(3) { /* Release Date */
+  margin-bottom: 0.5rem; /* Add space below genre and release date */
+}
+
+/* Button container */
+.button-container {
+  display: flex;
+  justify-content: space-between; /* Space between buttons */
+  margin-top: auto; /* Push buttons to the bottom */
+}
+
+.anime-card button {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
+  font-size: 0.75rem;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.anime-card button:hover {
+  background-color: #c82333; /* Darker red on hover */
+}
+
+/* Textarea styling */
+.review-section textarea {
+  width: calc(100% - 10px); /* Full width minus padding */
+  padding: 5px; /* Add padding */
+  margin-top: 0.5rem; /* Space above textarea */
+  border: 1px solid #ccc; /* Border for textarea */
+  border-radius: 4px; /* Rounded corners */
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
   header h1 {
-    margin: 0;
-    font-size: 1.8rem;
+    font-size: 2.2rem;
   }
-  
-  nav {
-    margin-top: 1rem;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
+
+  .anime-list {
+    justify-content: space-evenly; /* Space evenly on larger screens */
   }
-  
-  nav input[type="text"] {
-    width: 80%;
-    max-width: 300px;
-    padding: 0.5rem;
-    margin-right: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1rem;
+
+  .anime-card {
+    width: calc(33.33% - 1rem); /* Three cards per row */
   }
-  
-  nav button {
-    padding: 0.5rem 1rem;
-    background-color: #1abc9c;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    font-size: 1rem;
-    cursor: pointer;
-    margin-right: 1rem;
+}
+
+@media (max-width: 768px) {
+  .anime-card {
+    width: calc(50% - 1rem); /* Two cards per row on medium screens */
   }
-  
-  nav button:hover {
-    background-color: #16a085;
+}
+
+@media (max-width: 480px) {
+  .anime-card {
+    width: calc(100% - 1rem); /* Full width on small screens */
   }
-  
-  nav a {
-    color: #ecf0f1;
-    text-decoration: none;
-    margin: 0 0.5rem;
-    font-size: 1rem;
+
+  .modal-content {
+    width: 95%; /* Make modal slightly wider on very small screens */
   }
-  
-  nav a:hover {
-    text-decoration: underline;
-  }
-  
-  main {
-    padding: 1rem;
-  }
-  
-  #anime-list {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 1rem;
-  }
-  
-  /* Responsive Design */
-  @media (min-width: 768px) {
-    nav {
-      flex-wrap: nowrap;
-    }
-  
-    nav input[type="text"] {
-      width: 50%;
-    }
-  
-    #anime-list {
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: space-evenly;
-    }
-  
-    header h1 {
-      font-size: 2.2rem;
-    }
-  }
-  
+}

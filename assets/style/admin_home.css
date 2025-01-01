@@ -53,9 +53,11 @@ main {
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   width: 200px; /* Default width for larger screens */
+  height: 300px;
   padding: 1rem;
   cursor: pointer;
   position: relative;
+  transition: transform 0.2s;
 }
 
 .anime-card h3 {
@@ -67,18 +69,25 @@ main {
   margin: 0.25rem 0;
   font-size: 0.9rem;
   color: #555;
+  max-height: 100px; 
+  overflow-y: auto; 
+}
+
+.anime-card:hover {
+  transform: scale(1.02); /* Slightly enlarge on hover */
 }
 
 .anime-card button {
-  position: absolute;
+  position: relative;
   top: 8px;
-  right: 8px;
+  right: 1px;
   background-color: #dc3545;
   color: white;
   border: none;
   padding: 0.25rem 0.5rem;
   cursor: pointer;
   font-size: 0.75rem;
+  border-radius: 5%;
 }
 
 /* Fullscreen Overlay */

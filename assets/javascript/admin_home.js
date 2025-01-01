@@ -91,8 +91,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 animeCard.innerHTML = `
                     <h3>${anime.title}</h3>
                     <p>${anime.description}</p>
-                    <p>Genre: ${anime.genre}</p>
-                    <p>Release Date: ${anime.releaseDate}</p>
+                    <p style="font-weight: bold;">Genre: ${anime.genre}</p>
+                    <p style="font-weight: bold;">Release Date: ${anime.releaseDate}</p>
                     <button class="delete-button" data-id="${anime.id}">Delete</button>
                 `;
                 
