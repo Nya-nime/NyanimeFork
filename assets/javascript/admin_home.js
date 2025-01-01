@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        const payload = JSON.stringify({ title, description, genre, releaseDate, createdBy });
+        const payload = JSON.stringify({ title, description, genre, releaseDate});
 
         const url = currentEditId ? `http://localhost:8080/anime/${currentEditId}` : 'http://localhost:8080/anime/';
         const method = currentEditId ? 'PUT' : 'POST';
