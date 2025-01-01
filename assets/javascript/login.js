@@ -35,6 +35,8 @@ loginForm.addEventListener('submit', (event) => {
             localStorage.setItem('jwtToken', data.token);
             console.log('Token saved:', data.token); // Log token yang disimpan
 
+            localStorage.setItem('userId', data.user.id);
+
             // Arahkan pengguna berdasarkan peran
             if (data.user && data.user.role === 'admin') {
                 window.location.href = 'admin_home.html'; // Halaman untuk admin
