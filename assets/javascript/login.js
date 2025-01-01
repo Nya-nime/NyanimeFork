@@ -8,11 +8,11 @@ loginForm.addEventListener('submit', (event) => {
 
     // Validasi input
     if (!email || !password) {
-        alert('Please enter both email and password.');
+        alert('Silakan masukkan email dan password.');
         return;
     }
 
-    console.log('Attempting to log in with:', { email, password });
+    console.log('Mencoba login dengan:', { email, password });
 
     fetch('http://localhost:8080/user/login', {
         method: 'POST',
@@ -22,21 +22,26 @@ loginForm.addEventListener('submit', (event) => {
         body: JSON.stringify({ email, password }),
     })
     .then(response => {
-        console.log('Response status:', response.status); // Log status respons
+        console.log('Status respons:', response.status); // Log status respons
         if (!response.ok) {
-            throw new Error('Login failed: ' + response.statusText);
+            return response.text().then(text => {
+                console.error('Error response:', text); // Log respons error
+                throw new Error('Login gagal: ' + response.statusText);
+            });
         }
         return response.json(); // Mengembalikan respons dalam format JSON
     })
     .then(data => {
-        console.log('Response data:', data); // Log data respons
+        console.log('Data respons:', data); // Log data respons
+        // Pastikan data.token ada
         if (data.token) {
-            // Simpan token di localStorage
             localStorage.setItem('jwtToken', data.token);
-            console.log('Token saved:', data.token); // Log token yang disimpan
-
-            localStorage.setItem('userId', data.user.id);
-
+            console.log('Token disimpan:', data.token); // Log token yang disimpan
+            // Simpan user ID jika ada
+            if (data.user && data.user.id) {
+                localStorage.setItem('userId', data.user.id);
+                console.log('User ID disimpan:', data.user.id); // Log user ID yang disimpan
+            }
             // Arahkan pengguna berdasarkan peran
             if (data.user && data.user.role === 'admin') {
                 window.location.href = 'admin_home.html'; // Halaman untuk admin
@@ -44,11 +49,12 @@ loginForm.addEventListener('submit', (event) => {
                 window.location.href = 'user_home.html'; // Halaman untuk pengguna biasa
             }
         } else {
-            alert('Login failed: No token received.');
+            alert('Login gagal: Tidak ada token yang diterima.');
         }
     })
+    
     .catch(error => {
-        console.error('There was a problem with the fetch operation:', error);
-        alert('Login failed: ' + error.message);
+        console.error('Ada masalah dengan operasi fetch:', error);
+        alert('Login gagal: ' + error.message);
     });
 });

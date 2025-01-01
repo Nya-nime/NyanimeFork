@@ -32,6 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const genre = document.getElementById('genre').value;
         const releaseDate = document.getElementById('release_date').value;
         const createdBy = localStorage.getItem('userId');
+        const token = localStorage.getItem('jwtToken'); // Get the token
 
         if (!createdBy) {
             alert('User ID is required!');
@@ -47,13 +48,14 @@ document.addEventListener('DOMContentLoaded', () => {
             method,
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`
+                'Authorization': `Bearer ${token}` // Ensure the token is included
             },
             body: payload,
         })
         .then(response => {
             if (!response.ok) {
                 return response.text().then(text => {
+                    console.error('Response Error:', text); // Log the error response
                     throw new Error(text);
                 });
             }
@@ -160,7 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
             localStorage.removeItem('jwtToken');
-            window.location.href = 'login.html';
+            window.location.href = 'index.html';
         })
         .catch(error => {
             console.error('Error during logout:', error);
