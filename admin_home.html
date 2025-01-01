@@ -11,30 +11,39 @@
   <header>
     <h1>Admin Dashboard</h1>
     <nav>
-      <button id="logout" type="click">Logout</button>
+      <button id="logout">Logout</button>
     </nav>
   </header>
   <main>
-    <div class="hero" id="hero-section" style="display: none;"> <!-- Pastikan ini disembunyikan secara default -->
-      <h2>Add Anime</h2>
-      <form id="add-anime-form">
-          <label for="title">Title</label>
-          <input type="text" id="title" name="title" required>
-          <label for="description">Description</label>
-          <textarea id="description" name="description" required></textarea>
-          <label for="genre">Genre</label>
-          <input type="text" id="genre" name="genre" required>
-          <label for="release_date">Release Date</label>
-          <input id="release_date" name="release_date" required>
-          <button type="submit">Submit</button>
-          <button type="button" id="cancel-button">Cancel</button>
-      </form>
-  </div>
-  <button id="add-anime-button">Add Anime</button>
-    <section id="anime-list">
-        <h2>Anime List</h2>
-        <!-- Daftar anime akan muncul di sini -->
+    <button id="add-anime-button">Add Anime</button>
+    <section id="anime-list" class="anime-list">
+      <h2>Anime List</h2>
+      <!-- Cards will be appended here -->
     </section>
-</main>
+  </main>
+
+  <!-- Modal Form -->
+  <!-- Modal Form -->
+<div id="modal-form" class="modal hidden">
+  <div class="modal-content">
+    <h2 id="modal-title">Add/Edit Anime</h2>
+    <form id="anime-form">
+      <label for="title">Title</label>
+      <input type="text" id="title" name="title" required>
+      <label for="description">Description</label>
+      <textarea id="description" name="description" required></textarea>
+      <label for="genre">Genre</label>
+      <input type="text" id="genre" name="genre" required>
+      <label for="release_date">Release Date</label>
+      <input type="date" id="release_date" name="release_date" required>
+      <div class="modal-buttons">
+        <button type="submit" id="submit-button">Save</button>
+        <button type="button" id="cancel-button">Cancel</button>
+        <button type="button" id="delete-button" class="hidden">Delete</button>
+      </div>
+    </form>
+  </div>
+</div>
+
 </body>
 </html>
