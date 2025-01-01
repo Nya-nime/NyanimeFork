@@ -1,58 +1,36 @@
 document.addEventListener('DOMContentLoaded', () => {
     const addAnimeButton = document.getElementById('add-anime-button');
-    const heroSection = document.getElementById('hero-section');
-    const addAnimeForm = document.getElementById('add-anime-form');
+    const modalOverlay = document.getElementById('modal-overlay');
     const adminAnimeList = document.getElementById('anime-list');
-    const cancelButton = document.getElementById('cancel-button');
     const adminLogoutButton = document.getElementById('logout');
-
-    // Modal elements
-    const modal = document.createElement('div');
-    modal.id = 'modal';
-    modal.style.display = 'none';
-    modal.innerHTML = `
-        <div class="modal-content">
-            <form id="modal-form">
-                <label for="modal-title">Title</label>
-                <input type="text" id="modal-title" name="title" required>
-                <label for="modal-description">Description</label>
-                <textarea id="modal-description" name="description" required></textarea>
-                <label for="modal-genre">Genre</label>
-                <input type="text" id="modal-genre" name="genre" required>
-                <label for="modal-release-date">Release Date</label>
-                <input id="modal-release-date" name="release_date" required>
-                <button type="submit">Submit</button>
-                <button type="button" id="modal-cancel">Cancel</button>
-            </form>
-        </div>
-    `;
-    document.body.appendChild(modal);
-
-    const modalForm = document.getElementById('modal-form');
-    const modalCancel = document.getElementById('modal-cancel');
 
     let currentEditId = null;
 
-    // Tampilkan modal untuk create anime
+    // Show modal for adding a new anime
     addAnimeButton.addEventListener('click', () => {
-        modal.style.display = 'block';
-        currentEditId = null;
+        modalOverlay.classList.remove('hidden');
+        document.getElementById('modal-title').innerText = 'Add Anime'; // Set title for adding
+        document.getElementById('submit-button').innerText = 'Save'; // Set button text to Save
+        modalForm.reset(); // Reset the form for new entry
+        currentEditId = null; // Clear the current edit ID
     });
 
-    // Sembunyikan modal
+    // Hide modal
+    const modalCancel = document.getElementById('cancel-button');
     modalCancel.addEventListener('click', () => {
-        modal.style.display = 'none';
-        modalForm.reset();
+        modalOverlay.classList.add('hidden');
+        modalForm.reset(); // Reset the form when closing
     });
 
-    // Menangani pengiriman form modal
+    // Handle form submission
+    const modalForm = document.getElementById('anime-form');
     modalForm.addEventListener('submit', (event) => {
         event.preventDefault();
 
-        const title = document.getElementById('modal-title').value;
-        const description = document.getElementById('modal-description').value;
-        const genre = document.getElementById('modal-genre').value;
-        const releaseDate = document.getElementById('modal-release-date').value;
+        const title = document.getElementById('title').value;
+        const description = document.getElementById('description').value;
+        const genre = document.getElementById('genre').value;
+        const releaseDate = document.getElementById('release_date').value;
         const createdBy = localStorage.getItem('userId');
 
         if (!createdBy) {
@@ -81,10 +59,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             return response.json();
         })
-        .then(data => {
-            modal.style.display = 'none';
-            modalForm.reset();
-            loadAnimeList();
+        .then(() => {
+            modalOverlay.classList.add('hidden'); // Hide modal after submission
+            modalForm.reset(); // Reset the form
+            loadAnimeList(); // Refresh the anime list
         })
         .catch(error => {
             console.error('Error:', error);
@@ -117,14 +95,18 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p>Release Date: ${anime.releaseDate}</p>
                     <button class="delete-button" data-id="${anime.id}">Delete</button>
                 `;
+                
+                // Show modal with the form for editing
                 animeCard.addEventListener('click', () => {
                     currentEditId = anime.id;
-                    document.getElementById('modal-title').value = anime.title;
-                    document.getElementById('modal-description').value = anime.description;
-                    document.getElementById('modal-genre').value = anime.genre;
-                    document.getElementById('modal-release-date').value = anime.releaseDate;
-                    modal.style.display = 'block';
+                    document.getElementById('modal-title').innerText = 'Edit Anime'; // Set title for editing
+                    document.getElementById('title').value = anime.title;
+                    document.getElementById('description').value = anime.description;
+                    document.getElementById('genre').value = anime.genre;
+                    document.getElementById('release_date').value = anime.releaseDate;
+                    modalOverlay.classList.remove('hidden'); // Show modal
                 });
+
                 adminAnimeList.appendChild(animeCard);
 
                 animeCard.querySelector('.delete-button').addEventListener('click', (event) => {
