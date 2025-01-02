@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
         animeCard.classList.add('anime-card');
         animeCard.innerHTML = `
             <h3>${anime.title}</h3>
-            <p>${anime.description}</p>
+            <p class="anime-description">${anime.description}</p> <!-- Tambahkan kelas untuk deskripsi -->
             <p style="font-weight: bold;">Genre: ${anime.genre}</p>
             <p style="font-weight: bold;">Release Date: ${anime.releaseDate}</p>
             <p style="font-weight: bold;">Rating: <span class="rating-display">${anime.rating ? anime.rating.toFixed(1) : 'N/A'}</span></p>
@@ -66,9 +66,10 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="review-section" id="review-section-${anime.id}" style="display: none;">
                 <textarea id="review-input-${anime.id}" placeholder="Write your review here..."></textarea>
                 <button class="submit-review" data-id="${anime.id}">Submit Review</button>
+                <button class="cancel-review" data-id="${anime.id}">Cancel</button> <!-- Tambahkan tombol Cancel Review -->
             </div>
         `;
-
+    
         // Handle star rating click
         const starRating = animeCard.querySelector('.star-rating');
         starRating.addEventListener('click', (event) => {
@@ -79,22 +80,29 @@ document.addEventListener('DOMContentLoaded', () => {
                 updateStarDisplay(starRating, ratingValue); // Update star display
             }
         });
-
+    
         // Handle favorite button click
         const favoriteButton = animeCard.querySelector('.favorite-button');
         favoriteButton.addEventListener('click', (event) => {
             event.stopPropagation();
             markAsFavorite(anime.id);
         });
-
+    
         // Handle review button click
         const reviewButton = animeCard.querySelector('.review-button');
         reviewButton.addEventListener('click', (event) => {
             event.stopPropagation();
             const reviewSection = document.getElementById(`review-section-${anime.id}`);
-            reviewSection.style.display = reviewSection.style.display === 'none' ? 'block' : 'none'; // Toggle review section
+            const description = animeCard.querySelector('.anime-description'); // Ambil elemen deskripsi
+            if (reviewSection.style.display === 'none') {
+                description.style.display = 'none'; // Sembunyikan deskripsi
+                reviewSection.style.display = 'block'; // Tampilkan bagian review
+            } else {
+                description.style.display = 'block'; // Tampilkan deskripsi
+                reviewSection.style.display = 'none'; // Sembunyikan bagian review
+            }
         });
-
+    
         // Handle review submission
         const submitReviewButton = animeCard.querySelector('.submit-review');
         submitReviewButton.addEventListener('click', (event) => {
@@ -102,15 +110,30 @@ document.addEventListener('DOMContentLoaded', () => {
             const reviewInput = document.getElementById(`review-input-${anime.id}`);
             const reviewText = reviewInput.value;
             if (reviewText) {
-                submitReview(anime.id, reviewText);
-                reviewInput.value = ''; // Clear input after submission
+                submitReview(anime.id, reviewText).then(() => {
+                    const description = animeCard.querySelector('.anime-description'); // Ambil elemen deskripsi
+                    description.style.display = 'block'; // Tampilkan deskripsi kembali
+                    reviewSection.style.display = 'none'; // Sembunyikan bagian review
+                    reviewInput.value = ''; // Clear input after submission
+                });
             } else {
                 alert('Please enter a review before submitting.');
             }
         });
-
+    
+        // Handle cancel review button click
+        const cancelReviewButton = animeCard.querySelector('.cancel-review');
+        cancelReviewButton.addEventListener('click', (event) => {
+            event.stopPropagation();
+            const reviewSection = document.getElementById(`review-section-${anime.id}`);
+            const description = animeCard.querySelector('.anime-description'); // Ambil elemen deskripsi
+            description.style.display = 'block'; // Tampilkan deskripsi kembali
+            reviewSection.style.display = 'none'; // Sembunyikan bagian review
+        });
+    
         adminAnimeList.appendChild(animeCard); // Add the card to the list
     }
+    
 
     function updateStarDisplay(starRating, ratingValue) {
         const stars = starRating.querySelectorAll('.star');
@@ -170,7 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function submitReview(animeId, reviewText) {
-        fetch(`http://localhost:8080/anime/review/${animeId}`, {
+        return fetch(`http://localhost:8080/anime/review/${animeId}`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${token}`,
@@ -190,6 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('Error submitting review. Please try again.');
         });
     }
+    
 
     adminLogoutButton.addEventListener('click', () => {
         if (!token) {
