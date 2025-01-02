@@ -6,6 +6,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let currentEditId = null;
 
+    // Cek apakah pengguna sudah login
+    const token = localStorage.getItem('jwtToken');
+    if (!token) {
+        // Jika tidak ada token, arahkan ke halaman login
+        window.location.href = 'llogin.html'; // Ganti dengan URL halaman login Anda
+    }
+
     // Show modal for adding a new anime
     addAnimeButton.addEventListener('click', () => {
         modalOverlay.classList.remove('hidden');
@@ -32,14 +39,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const genre = document.getElementById('genre').value;
         const releaseDate = document.getElementById('release_date').value;
         const createdBy = localStorage.getItem('userId');
-        const token = localStorage.getItem('jwtToken'); // Get the token
 
         if (!createdBy) {
             alert('User ID is required!');
             return;
         }
 
-        const payload = JSON.stringify({ title, description, genre, releaseDate});
+        const payload = JSON.stringify({ title, description, genre, releaseDate });
 
         const url = currentEditId ? `http://localhost:8080/anime/${currentEditId}` : 'http://localhost:8080/anime/';
         const method = currentEditId ? 'PUT' : 'POST';
@@ -63,7 +69,8 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .then(() => {
             modalOverlay.classList.add('hidden'); // Hide modal after submission
-            modalForm.reset(); // Reset the form
+            modalForm.reset();
+            alert("Anime successfully Added/updated!");
             loadAnimeList(); // Refresh the anime list
         })
         .catch(error => {
@@ -76,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
         fetch('http://localhost:8080/anime/', {
             method: 'GET',
             headers: {
-                'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`
+                'Authorization': `Bearer ${token}`
             }
         })
         .then(response => {
@@ -126,23 +133,23 @@ document.addEventListener('DOMContentLoaded', () => {
         fetch(`http://localhost:8080/anime/${id}`, {
             method: 'DELETE',
             headers: {
-                'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`
+                'Authorization': `Bearer ${token}`
             }
         })
         .then(response => {
             if (!response.ok) {
                 throw new Error('Failed to delete anime');
             }
+            alert("Delete anime successfully!");
             loadAnimeList();
         })
         .catch(error => {
             console.error('Error:', error);
+            alert(`Error deleting anime: ${error.message}`);
         });
     }
 
     adminLogoutButton.addEventListener('click', () => {
-        const token = localStorage.getItem('jwtToken');
-
         if (!token) {
             alert('You are not logged in.');
             return;
@@ -163,6 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             localStorage.removeItem('jwtToken');
             window.location.href = 'index.html';
+            alert("Logout successful!");
         })
         .catch(error => {
             console.error('Error during logout:', error);

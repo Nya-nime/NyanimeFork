@@ -50,6 +50,11 @@ main {
   padding: 2rem;
 }
 
+.judul {
+  text-decoration: none;
+  color: inherit;
+}
+
 #add-anime-button {
   background-color: #28a745;
   color: white;
