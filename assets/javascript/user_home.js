@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchBar = document.getElementById('search-bar');
     const searchButton = document.getElementById('search-button');
     const adminLogoutButton = document.getElementById('logout');
+    const profileButton = document.getElementById('profile'); // Ambil tombol profile
 
     // Cek apakah pengguna sudah login
     const token = localStorage.getItem('jwtToken');
@@ -18,6 +19,11 @@ document.addEventListener('DOMContentLoaded', () => {
     searchButton.addEventListener('click', () => {
         const searchTerm = searchBar.value.toLowerCase();
         loadAnimeList(searchTerm);
+    });
+
+    // Event listener untuk tombol profile
+    profileButton.addEventListener('click', () => {
+        window.location.href = 'profile.html'; // Ganti dengan URL halaman profil Anda
     });
 
     function loadAnimeList(searchTerm = '') {

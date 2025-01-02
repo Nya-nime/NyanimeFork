@@ -9,16 +9,10 @@
 </head>
 <body>
   <header>
-    <nav class="navbar">
-      <div class="logo">
-        <img src="path/to/logo.png" alt="Logo" />
-        <span>Profile</span>
-      </div>
-      <ul class="nav-links">
-        <li><a href="user_home.html">Home</a></li>
-        <li><button type="logout">Logout</button></li>
-        <li><a href="edit_profile.html">profile</a></li>
-      </ul>
+    <h1><a class="judul" href="user_home.html"><i>Nyanime</i></a></h1>
+    <nav>
+        <button type="logout">Logout</button>
+        <button type="edit">Profile</button>
     </nav>
   </header>
   <main>
@@ -27,22 +21,13 @@
         <img src="path/to/profile-pic.jpg" alt="Profile Picture" class="profile-pic" />
         <div class="profile-info">
           <h1 class="username">Ferdy</h1>
-          <!-- <button class="edit-profile-btn">Edit Profile</button> -->
         </div>
       </div>
       <div class="profile-stats">
-        <div class="stat">
-          <h2>5</h2>
-          <p>Films</p>
-        </div>
-        <div class="stat">
-          <h2>0</h2>
-          <p>Following</p>
-        </div>
-        <div class="stat">
-          <h2>0</h2>
-          <p>Followers</p>
-        </div>
+        <!-- Tombol langsung di dalam profile stats -->
+        <button class="profile-button">Favorite</button>
+        <button class="profile-button">Reviews</button>
+        <button class="profile-button">Edit Profile</button>
       </div>
     </section>
   </main>
