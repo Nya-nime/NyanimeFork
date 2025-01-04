@@ -22,6 +22,18 @@ document.addEventListener('DOMContentLoaded', () => {
         currentEditId = null; // Clear the current edit ID
     });
 
+    window.addEventListener('popstate', () => {
+        // Clear the token and redirect to login
+        localStorage.removeItem('jwtToken');
+        window.location.href = 'llogin.html'; // Ganti dengan URL halaman login Anda
+    });
+
+        // Clear token on page unload
+    window.addEventListener('beforeunload', () => {
+        localStorage.removeItem('jwtToken');
+    });
+    
+
     // Hide modal
     const modalCancel = document.getElementById('cancel-button');
     modalCancel.addEventListener('click', () => {

@@ -49,6 +49,7 @@ function loadAnimeList(query = '', genre = '', year = '') {
             return;
         }
         data.forEach(anime => {
+            console.log(`Anime: ${anime.title}, Average Rating: ${anime.average_rating}`);
             const animeCard = document.createElement('div');
             animeCard.classList.add('anime-card');
             animeCard.innerHTML = `
@@ -56,6 +57,7 @@ function loadAnimeList(query = '', genre = '', year = '') {
                 <p>${anime.description.length > 100 ? anime.description.substring(0, 100) + '...' : anime.description}</p>
                 <p style="font-weight: bold;">Genre: ${anime.genre}</p>
                 <p style="font-weight: bold;">Release Date: ${anime.releaseDate}</p>
+                <p style="font-weight: bold;">Rating: <span class="rating-display">${anime.average_rating ? anime.average_rating.toFixed(1) : ''}</span></p>
             `;
             animeList.appendChild(animeCard); // Append the card to the list
 

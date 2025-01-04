@@ -11,6 +11,12 @@ fetch('/api/user/profile')
     document.querySelector('.stat:nth-child(3) h2').textContent = data.followersCount;
   });
 
+  const token = localStorage.getItem('jwtToken');
+  if (!token) {
+      // Jika tidak ada token, arahkan ke halaman login
+      window.location.href = 'llogin.html'; // Ganti dengan URL halaman login Anda
+  }
+
 // Logout functionality
 logoutButton.addEventListener('click', () => {
   fetch('/api/logout', { method: 'POST' })

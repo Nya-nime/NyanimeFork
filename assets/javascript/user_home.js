@@ -3,12 +3,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchBar = document.getElementById('search-bar');
     const searchButton = document.getElementById('search-button');
     const adminLogoutButton = document.getElementById('logout');
-    const profileButton = document.getElementById('profile'); // Ambil tombol profile
+    const profileButton = document.getElementById('profile');
 
     // Cek apakah pengguna sudah login
     const token = localStorage.getItem('jwtToken');
     if (!token) {
-        // Jika tidak ada token, arahkan ke halaman login
         window.location.href = 'llogin.html'; // Ganti dengan URL halaman login Anda
     }
 
@@ -25,6 +24,19 @@ document.addEventListener('DOMContentLoaded', () => {
     profileButton.addEventListener('click', () => {
         window.location.href = 'profile.html'; // Ganti dengan URL halaman profil Anda
     });
+
+    // Logout on back navigation
+    window.addEventListener('popstate', () => {
+        // Clear the token and redirect to login
+        localStorage.removeItem('jwtToken');
+        window.location.href = 'llogin.html'; // Ganti dengan URL halaman login Anda
+    });
+
+        // Clear token on page unload
+        window.addEventListener('beforeunload', () => {
+            localStorage.removeItem('jwtToken');
+        });
+    
 
     function loadAnimeList(searchTerm = '') {
         fetch('http://localhost:8080/anime/', {
@@ -54,10 +66,10 @@ document.addEventListener('DOMContentLoaded', () => {
         animeCard.classList.add('anime-card');
         animeCard.innerHTML = `
             <h3>${anime.title}</h3>
-            <p class="anime-description">${anime.description}</p> <!-- Tambahkan kelas untuk deskripsi -->
+            <p class="anime-description">${anime.description}</p>
             <p style="font-weight: bold;">Genre: ${anime.genre}</p>
             <p style="font-weight: bold;">Release Date: ${anime.releaseDate}</p>
-            <p style="font-weight: bold;">Rating: <span class="rating-display">${anime.rating ? anime.rating.toFixed(1) : 'N/A'}</span></p>
+            <p style="font-weight: bold;">Rating: <span class="rating-display">${anime.average_rating ? anime.average_rating.toFixed(1) : 'N/A'}</span></p>
             <div class="star-rating" data-id="${anime.id}">
                 <span class="star" data-value="1">&#9733;</span>
                 <span class="star" data-value="2">&#9733;</span>
@@ -72,10 +84,10 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="review-section" id="review-section-${anime.id}" style="display: none;">
                 <textarea id="review-input-${anime.id}" placeholder="Write your review here..."></textarea>
                 <button class="submit-review" data-id="${anime.id}">Submit Review</button>
-                <button class="cancel-review" data-id="${anime.id}">Cancel</button> <!-- Tambahkan tombol Cancel Review -->
+                <button class="cancel-review" data-id="${anime.id}">Cancel</button>
             </div>
         `;
-    
+
         // Handle star rating click
         const starRating = animeCard.querySelector('.star-rating');
         starRating.addEventListener('click', (event) => {
@@ -83,32 +95,32 @@ document.addEventListener('DOMContentLoaded', () => {
             if (target.classList.contains('star')) {
                 const ratingValue = parseFloat(target.getAttribute('data-value'));
                 submitRating(anime.id, ratingValue);
-                updateStarDisplay(starRating, ratingValue); // Update star display
+                updateStarDisplay(starRating, ratingValue);
             }
         });
-    
+
         // Handle favorite button click
         const favoriteButton = animeCard.querySelector('.favorite-button');
         favoriteButton.addEventListener('click', (event) => {
             event.stopPropagation();
             markAsFavorite(anime.id);
         });
-    
+
         // Handle review button click
         const reviewButton = animeCard.querySelector('.review-button');
         reviewButton.addEventListener('click', (event) => {
             event.stopPropagation();
             const reviewSection = document.getElementById(`review-section-${anime.id}`);
-            const description = animeCard.querySelector('.anime-description'); // Ambil elemen deskripsi
+            const description = animeCard.querySelector('.anime-description');
             if (reviewSection.style.display === 'none') {
-                description.style.display = 'none'; // Sembunyikan deskripsi
-                reviewSection.style.display = 'block'; // Tampilkan bagian review
+                description.style.display = 'none';
+                reviewSection.style.display = 'block';
             } else {
-                description.style.display = 'block'; // Tampilkan deskripsi
-                reviewSection.style.display = 'none'; // Sembunyikan bagian review
+                description.style.display = 'block';
+                reviewSection.style.display = 'none';
             }
         });
-    
+
         // Handle review submission
         const submitReviewButton = animeCard.querySelector('.submit-review');
         submitReviewButton.addEventListener('click', (event) => {
@@ -117,38 +129,37 @@ document.addEventListener('DOMContentLoaded', () => {
             const reviewText = reviewInput.value;
             if (reviewText) {
                 submitReview(anime.id, reviewText).then(() => {
-                    const description = animeCard.querySelector('.anime-description'); // Ambil elemen deskripsi
-                    description.style.display = 'block'; // Tampilkan deskripsi kembali
-                    reviewSection.style.display = 'none'; // Sembunyikan bagian review
-                    reviewInput.value = ''; // Clear input after submission
+                    const description = animeCard.querySelector('.anime-description');
+                    description.style.display = 'block';
+                    reviewSection.style.display = 'none';
+                    reviewInput.value = '';
                 });
             } else {
                 alert('Please enter a review before submitting.');
             }
         });
-    
+
         // Handle cancel review button click
         const cancelReviewButton = animeCard.querySelector('.cancel-review');
         cancelReviewButton.addEventListener('click', (event) => {
             event.stopPropagation();
             const reviewSection = document.getElementById(`review-section-${anime.id}`);
-            const description = animeCard.querySelector('.anime-description'); // Ambil elemen deskripsi
-            description.style.display = 'block'; // Tampilkan deskripsi kembali
-            reviewSection.style.display = 'none'; // Sembunyikan bagian review
+            const description = animeCard.querySelector('.anime-description');
+            description.style.display = 'block';
+            reviewSection.style.display = 'none';
         });
-    
-        adminAnimeList.appendChild(animeCard); // Add the card to the list
+
+        adminAnimeList.appendChild(animeCard);
     }
-    
 
     function updateStarDisplay(starRating, ratingValue) {
         const stars = starRating.querySelectorAll('.star');
         stars.forEach(star => {
             const value = parseFloat(star.getAttribute('data-value'));
             if (value <= ratingValue) {
-                star.style.color = 'gold'; // Highlight selected stars
+                star.style.color = 'gold';
             } else {
-                star.style.color = 'gray'; // Default color for unselected stars
+                star.style.color = 'gray';
             }
         });
     }
@@ -160,7 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ userId: localStorage.getItem('userId') }) // Assuming you need to send userId
+            body: JSON.stringify({ userId: localStorage.getItem('userId') })
         })
         .then(response => {
             if (!response.ok) {
@@ -175,7 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function submitRating(animeId, rating) {
-        fetch(`http://localhost:8080/anime/rate/${animeId}`, {
+        fetch(`http://localhost:8080/review/anime/${animeId}`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${token}`,
@@ -188,64 +199,33 @@ document.addEventListener('DOMContentLoaded', () => {
                 throw new Error('Failed to submit rating');
             }
             alert('Rating submitted successfully!');
-            // Optionally, refresh the rating display
-            const ratingDisplay = document.querySelector(`.rating-display`);
-            ratingDisplay.textContent = rating.toFixed(1); // Update the displayed rating
         })
         .catch(error => {
             console.error('Error:', error);
-            alert('Error submitting rating. Please try again.');
         });
     }
 
     function submitReview(animeId, reviewText) {
-        return fetch(`http://localhost:8080/anime/review/${animeId}`, {
+        return fetch(`http://localhost:8080/review/anime/${animeId}`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ userId: localStorage.getItem('userId'), review: reviewText })
+            body: JSON.stringify({
+                content: reviewText,
+                userId: localStorage.getItem('userId')
+            })
         })
         .then(response => {
             if (!response.ok) {
                 throw new Error('Failed to submit review');
             }
             alert('Review submitted successfully!');
-            // Optionally, refresh the user's profile or the anime list
         })
         .catch(error => {
             console.error('Error:', error);
             alert('Error submitting review. Please try again.');
         });
     }
-    
-
-    adminLogoutButton.addEventListener('click', () => {
-        if (!token) {
-            alert('You are not logged in.');
-            return;
-        }
-
-        fetch('http://localhost:8080/user/logout', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            }
-        })
-        .then(response => {
-            if (!response.ok) {
-                return response.text().then(errorMessage => {
-                    throw new Error('Logout failed: ' + errorMessage);
-                });
-            }
-            localStorage.removeItem('jwtToken');
-            window.location.href = 'login.html';
-        })
-        .catch(error => {
-            console.error('Error during logout:', error);
-            alert('Logout failed: ' + error.message);
-        });
-    });
 });
