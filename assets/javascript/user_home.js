@@ -24,18 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
     profileButton.addEventListener('click', () => {
         window.location.href = 'profile.html'; // Ganti dengan URL halaman profil Anda
     });
-
-    // Logout on back navigation
-    window.addEventListener('popstate', () => {
-        // Clear the token and redirect to login
-        localStorage.removeItem('jwtToken');
-        window.location.href = 'llogin.html'; // Ganti dengan URL halaman login Anda
-    });
-
-        // Clear token on page unload
-        window.addEventListener('beforeunload', () => {
-            localStorage.removeItem('jwtToken');
-        });
     
 
     function loadAnimeList(searchTerm = '') {
@@ -164,26 +152,31 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    function markAsFavorite(animeId) {
-        fetch(`http://localhost:8080/anime/favorite/${animeId}`, {
-            method: 'POST',
-            headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ userId: localStorage.getItem('userId') })
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Failed to mark as favorite');
-            }
-            alert('Anime marked as favorite!');
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('Error marking as favorite. Please try again.');
-        });
-    }
+    function markAsFavorite(animeId) {    
+        fetch(`http://localhost:8080/favorite/${animeId}`, {    
+            method: 'POST',    
+            headers: {    
+                'Authorization': `Bearer ${token}`,    
+                'Content-Type': 'application/json'    
+            },    
+            body: JSON.stringify({})    
+        })    
+        .then(response => {    
+            console.log('Response status:', response.status); // Log status respons  
+            return response.json().then(data => ({ status: response.status, body: data })); // Ambil data JSON  
+        })    
+        .then(({ status, body }) => {    
+            if (status !== 200 && status !== 201) {    
+                throw new Error(`Failed to mark as favorite: ${body.message || 'Unknown error'}`);    
+            }    
+            alert('Anime marked as favorite!');    
+            console.log('Favorite data:', body);    
+        })    
+        .catch(error => {    
+            console.error('Error:', error);    
+            alert('Error marking as favorite. Please try again.');    
+        });    
+    }      
 
     function submitRating(animeId, rating) {
         fetch(`http://localhost:8080/review/anime/${animeId}`, {
