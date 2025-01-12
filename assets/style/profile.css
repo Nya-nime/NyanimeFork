@@ -101,3 +101,41 @@ main {
   background-color: #e74c3c; /* Warna latar belakang saat hover */
 }
 
+.anime-list {  
+  display: flex; /* Use flexbox for horizontal layout */  
+  flex-wrap: wrap; /* Allow wrapping to the next line */  
+  gap: 1rem; /* Space between cards */  
+  justify-content: center; /* Center items on smaller screens */  
+}  
+  
+.anime-card {  
+  background-color: #fff;  
+  border-radius: 8px;  
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);  
+  width: calc(33.33% - 1rem); /* Set width to 1/3 of the container with reduced gap */  
+  height: 200px; /* Fixed height for cards */  
+  padding: 1rem;  
+  cursor: pointer; /* Pointer cursor for interactive cards */  
+  position: relative;  
+  transition: transform 0.1s, box-shadow 0.2s;  
+  overflow: hidden; /* Ensure content doesn't overflow */  
+  display: flex;  
+  flex-direction: column; /* Stack children vertically */  
+}  
+  
+.anime-card:hover {  
+  transform: scale(1.01); /* Slightly enlarge on hover */  
+}  
+  
+.anime-card h3 {  
+  margin: 0 0 0.5rem;  
+  font-size: 1.25rem;  
+}  
+  
+.anime-card p {  
+  margin: 0.25rem 0;  
+  font-size: 0.9rem;  
+  color: #555;  
+  max-height: 400px; /* Limit height for description */  
+  overflow-y: auto; /* Enable scrolling for long descriptions */  
+}  

@@ -1,35 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Profile</title>
-  <link rel="stylesheet" href="assets/style/profile.css">
-  <script defer src="assets/javascript/profile.js"></script>
-</head>
-<body>
-  <header>
-    <h1><a class="judul" href="user_home.html"><i>Nyanime</i></a></h1>
-    <nav>
-        <button type="logout">Logout</button>
-        <button type="edit">Profile</button>
-    </nav>
-  </header>
-  <main>
-    <section class="profile-section">
-      <div class="profile-header">
-        <img src="path/to/profile-pic.jpg" alt="Profile Picture" class="profile-pic" />
-        <div class="profile-info">
-          <h1 class="username">Ferdy</h1>
-        </div>
-      </div>
-      <div class="profile-stats">
-        <!-- Tombol langsung di dalam profile stats -->
-        <button class="profile-button">Favorite</button>
-        <button class="profile-button">Reviews</button>
-        <button class="profile-button">Edit Profile</button>
-      </div>
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+  <meta charset="UTF-8">  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+  <title>Profile</title>  
+  <link rel="stylesheet" href="assets/style/profile.css">  
+  <script defer src="assets/javascript/profile.js"></script>  
+</head>  
+<body>  
+  <header>  
+    <h1><a class="judul" href="user_home.html"><i>Nyanime</i></a></h1>  
+    <nav>  
+        <button id="logout">Logout</button> <!-- Tambahkan ID untuk tombol logout -->  
+        <button id="edit-profile">Edit Profile</button> <!-- Tambahkan ID untuk tombol edit -->  
+    </nav>  
+  </header>  
+  <main>  
+    <section class="profile-section">  
+      <div class="profile-header">  
+        <div class="profile-info">  
+          <h1 class="username"></h1> <!-- Elemen untuk menampilkan username -->  
+        </div>  
+      </div>  
+      <div class="profile-stats">    
+        <button class="profile-button" id="favoriteButton">Favorite</button>    
+        <button class="profile-button" id="reviewsButton">Reviews</button>    
+        <button class="profile-button" id="editProfileButton">Edit Profile</button>    
+      </div>    
+    </section>  
+    <section id="anime-list" class="anime-list">  
+      <!-- Search results will appear here -->  
     </section>
-  </main>
-</body>
-</html>
+  </main>  
+</body>  
+</html>  

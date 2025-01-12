@@ -178,25 +178,60 @@ document.addEventListener('DOMContentLoaded', () => {
         });    
     }      
 
-    function submitRating(animeId, rating) {
-        fetch(`http://localhost:8080/review/anime/${animeId}`, {
-            method: 'POST',
-            headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ userId: localStorage.getItem('userId'), rating: rating })
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Failed to submit rating');
-            }
-            alert('Rating submitted successfully!');
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-    }
+    function submitRating(animeId, rating) {  
+        const userId = localStorage.getItem('userId'); // Ambil user ID dari localStorage  
+      
+        // Cek apakah rating sudah ada  
+        fetch(`http://localhost:8080/review/anime/${animeId}/${userId}`, {  
+            method: 'GET',  
+            headers: {  
+                'Authorization': `Bearer ${token}`,  
+                'Content-Type': 'application/json'  
+            }  
+        })  
+        .then(response => {  
+            if (response.ok) {  
+                return response.json(); // Rating sudah ada, ambil data rating  
+            } else {  
+                // Jika rating belum ada, kita akan menambahkannya  
+                return null; // Kembalikan null jika rating tidak ditemukan  
+            }  
+        })  
+        .then(existingRating => {  
+            if (existingRating) {  
+                // Jika rating sudah ada, lakukan update  
+                return fetch(`http://localhost:8080/review/${existingRating.id}`, {  
+                    method: 'PUT',  
+                    headers: {  
+                        'Authorization': `Bearer ${token}`,  
+                        'Content-Type': 'application/json'  
+                    },  
+                    body: JSON.stringify({ rating: rating })  
+                });  
+            } else {  
+                // Jika rating belum ada, lakukan penambahan  
+                return fetch(`http://localhost:8080/review/anime/${animeId}`, {  
+                    method: 'POST',  
+                    headers: {  
+                        'Authorization': `Bearer ${token}`,  
+                        'Content-Type': 'application/json'  
+                    },  
+                    body: JSON.stringify({ userId: userId, rating: rating })  
+                });  
+            }  
+        })  
+        .then(response => {  
+            if (!response.ok) {  
+                throw new Error('Failed to submit rating');  
+            }  
+            alert('Rating submitted successfully!');  
+        })  
+        .catch(error => {  
+            console.error('Error:', error);  
+        });  
+    }  
+    
+    
 
     function submitReview(animeId, reviewText) {
         return fetch(`http://localhost:8080/review/anime/${animeId}`, {
