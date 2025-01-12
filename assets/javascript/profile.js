@@ -22,8 +22,7 @@ fetch('http://localhost:8080/user/profile', {
     document.querySelector('.username').textContent = data.username; // Menampilkan username      
   })      
   .catch((error) => {      
-    console.error('Error fetching profile data:', error);      
-    alert('Error fetching profile data. Please try again later.');      
+    console.error('Error fetching profile data:', error);            
   });      
   
 // Logout functionality      
@@ -54,12 +53,12 @@ reviewsButton.addEventListener('click', () => {
 
       reviews.forEach(review => {  
           const reviewCard = createReviewCard(review);  
+          console.log('Review ID:', review.id);
           animeList.appendChild(reviewCard);  
       });  
   })  
   .catch((error) => {  
       console.error('Error fetching reviews:', error);  
-      alert('Error fetching reviews. Please try again later.');  
   });  
 });  
 
@@ -95,24 +94,28 @@ favoriteButton.addEventListener('click', () => {
 });  
 
 function createReviewCard(review) {  
+
   const animeCard = document.createElement('div');  
   animeCard.classList.add('anime-card');  
   animeCard.innerHTML = `  
-      <h3>${review.anime_title}</h3> <!-- Pastikan ini sesuai dengan nama field -->  
+      <h3>${review.anime_title}</h3>  
       <p style="font-weight: bold;">Genre: ${review.genre}</p>  
       <p style="font-weight: bold;">Release Date: ${review.release_date}</p>  
       <p style="font-weight: bold;">Rating: <span class="rating-display">${review.rating ? review.rating.toFixed(1) : 'N/A'}</span></p>  
-      <p class="anime-description">${review.content}</p>
+      <p class="anime-description">${review.content}</p>  
       <button class="delete-button" data-review-id="${review.id}">Delete</button>  
-      `;  
-  
-    // Tambahkan event listener untuk tombol delete  
-    animeCard.querySelector('.delete-button').addEventListener('click', () => {  
-        deleteReview(review.id);  
-    });  
+  `;  
+
+  // Tambahkan event listener untuk tombol delete  
+  animeCard.querySelector('.delete-button').addEventListener('click', () => {  
+      const reviewId = review.id; // Ambil ID review dari objek review  
+      console.log('Review ID to delete:', reviewId); // Log ID review  
+      deleteReview(reviewId); // Panggil fungsi deleteReview dengan ID yang benar  
+  });  
 
   return animeCard;  
 }  
+
 
 function editReview(reviewId) {  
   const newContent = prompt("Enter new content for the review:");  
@@ -147,27 +150,26 @@ function editReview(reviewId) {
   }  
 }  
 
-
-function deleteReview(reviewId) {  
-  if (confirm("Are you sure you want to delete this review?")) {  
-      fetch(`http://localhost:8080/review/${reviewId}`, { // Gunakan rute yang sesuai  
-          method: 'DELETE',  
-          headers: {  
-              'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`  
-          }  
-      })  
-      .then(response => {  
-          if (!response.ok) {  
-              throw new Error('Failed to delete review');  
-          }  
-          console.log('Review deleted');  
-          reviewsButton.click(); // Refresh daftar review  
-      })  
-      .catch(error => {  
-          console.error('Error deleting review:', error);  
-          alert('Error deleting review. Please try again later.');  
-      });  
-  }  
+function deleteReview(reviewId) {    
+  if (confirm("Are you sure you want to delete this review?")) {    
+      console.log('Deleting review with ID:', reviewId); // Log ID review  
+      fetch(`http://localhost:8080/review/${reviewId}`, { // Gunakan rute yang sesuai    
+          method: 'DELETE',    
+          headers: {    
+              'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`    
+          }    
+      })    
+      .then(response => {    
+          if (!response.ok) {    
+              throw new Error('Failed to delete review');    
+          }    
+          console.log('Review deleted');    
+          reviewsButton.click(); // Refresh daftar review    
+      });    
+  }    
 }  
+
+
+
 
 
