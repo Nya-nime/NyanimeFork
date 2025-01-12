@@ -131,6 +131,32 @@ main {
   border-radius: 4px; /* Rounded corners */
 }
 
+.review-section {  
+  margin-top: 10px; /* Jarak antara elemen */  
+}  
+
+.star-rating {  
+  display: flex; /* Gunakan flexbox untuk menampilkan bintang dalam satu baris */  
+  margin-bottom: 10px; /* Jarak antara bintang dan textarea */  
+}  
+
+.star {  
+  font-size: 24px; /* Ukuran bintang */  
+  color: gray; /* Warna default bintang */  
+  cursor: pointer; /* Mengubah kursor menjadi pointer saat di-hover */  
+  margin-right: 5px; /* Jarak antara bintang */  
+}  
+
+.star:last-child {  
+  margin-right: 0; /* Hapus margin kanan pada bintang terakhir */  
+}  
+
+
+.star:hover {  
+  color: gold; /* Warna bintang saat di-hover */  
+}  
+
+
 /* Responsive Design */
 @media (min-width: 768px) {
   header h1 {

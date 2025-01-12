@@ -31,6 +31,27 @@
     <section id="anime-list" class="anime-list">  
       <!-- Search results will appear here -->  
     </section>
+    <div id="modal-overlay" class="modal hidden">  
+      <div class="modal-content">  
+          <h2 id="modal-title">Edit Review</h2>  
+          <form id="review-form">  
+              <input type="hidden" id="rating" />  
+              <label for="content">Content:</label>  
+              <textarea id="content" required></textarea>  
+              <div id="star-rating">  
+                  <span class="star" data-value="1">&#9733;</span>  
+                  <span class="star" data-value="2">&#9733;</span>  
+                  <span class="star" data-value="3">&#9733;</span>  
+                  <span class="star" data-value="4">&#9733;</span>  
+                  <span class="star" data-value="5">&#9733;</span>  
+              </div>  
+              <div class="modal-buttons">  
+                  <button type="submit">Save</button>  
+                  <button type="button" id="cancel-button">Cancel</button>  
+              </div>  
+          </form>  
+      </div>  
+  </div>    
   </main>  
 </body>  
 </html>  

@@ -1,175 +1,161 @@
-const logoutButton = document.getElementById('logout');      
-const reviewsButton = document.getElementById('reviewsButton'); // Ambil tombol Reviews  
-const favoriteButton = document.getElementById('favoriteButton'); // Ambil tombol Favorites  
-const contentContainer = document.getElementById('contentContainer'); // Kontainer untuk reviews dan favorites  
-  
-// Fetch profile data      
-console.log('Fetching profile data...');    
-fetch('http://localhost:8080/user/profile', {      
-  method: 'GET',      
-  headers: {      
-    'Authorization': `Bearer ${localStorage.getItem('jwtToken')}` // Ambil token dari localStorage      
-  }      
-})      
-  .then((response) => {      
-    console.log('Response status:', response.status); // Log status respons    
-    if (!response.ok) {      
-      throw new Error('Failed to fetch profile data');      
-    }      
-    return response.json();      
-  })      
-  .then((data) => {       
-    document.querySelector('.username').textContent = data.username; // Menampilkan username      
-  })      
-  .catch((error) => {      
-    console.error('Error fetching profile data:', error);            
-  });      
-  
-// Logout functionality      
-logoutButton.addEventListener('click', () => {      
-  fetch('http://localhost:8080/api/logout', { method: 'POST' })      
-    .then(() => {      
-      localStorage.removeItem('jwtToken'); // Hapus token dari localStorage saat logout      
-      window.location.href = 'index.html';      
-    });      
-});      
-   
-reviewsButton.addEventListener('click', () => {  
-  fetch('http://localhost:8080/review/reviews', {  
+document.addEventListener('DOMContentLoaded', () => {  
+  const logoutButton = document.getElementById('logout');  
+  const reviewsButton = document.getElementById('reviewsButton');  
+  const favoriteButton = document.getElementById('favoriteButton');  
+  const contentContainer = document.getElementById('contentContainer');  
+  const modalOverlay = document.getElementById('modal-overlay');  
+  const modalForm = document.getElementById('review-form');  
+  const modalCancel = document.getElementById('cancel-button');  
+  let currentEditId = null;  
+
+  // Cek apakah pengguna sudah login  
+  const token = localStorage.getItem('jwtToken');  
+  if (!token) {  
+      window.location.href = 'llogin.html'; // Ganti dengan URL halaman login Anda  
+  }  
+
+  // Fetch profile data  
+  console.log('Fetching profile data...');  
+  fetch('http://localhost:8080/user/profile', {  
       method: 'GET',  
       headers: {  
-          'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`  
+          'Authorization': `Bearer ${token}`  
       }  
   })  
   .then((response) => {  
+      console.log('Response status:', response.status);  
       if (!response.ok) {  
-          throw new Error('Failed to fetch reviews');  
+          throw new Error('Failed to fetch profile data');  
       }  
       return response.json();  
   })  
-  .then((reviews) => {  
-      const animeList = document.getElementById('anime-list');  
-      animeList.innerHTML = ''; // Kosongkan kontainer sebelumnya  
+  .then((data) => {  
+      document.querySelector('.username').textContent = data.username;  
+  })  
+  .catch((error) => {  
+      console.error('Error fetching profile data:', error);  
+  });  
 
-      reviews.forEach(review => {  
-          const reviewCard = createReviewCard(review);  
-          console.log('Review ID:', review.id);
-          animeList.appendChild(reviewCard);  
+  // Logout functionality  
+  logoutButton.addEventListener('click', () => {  
+      fetch('http://localhost:8080/api/logout', { method: 'POST' })  
+      .then(() => {  
+          localStorage.removeItem('jwtToken');  
+          window.location.href = 'index.html';  
       });  
-  })  
-  .catch((error) => {  
-      console.error('Error fetching reviews:', error);  
-  });  
-});  
-
-  
-// Fetch user favorites when the Favorites button is clicked  
-favoriteButton.addEventListener('click', () => {  
-  fetch('http://localhost:8080/user/favorite', {  
-    method: 'GET',  
-    headers: {  
-      'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`  
-    }  
-  })  
-  .then((response) => {  
-    if (!response.ok) {  
-      throw new Error('Failed to fetch favorites');  
-    }  
-    return response.json();  
-  })  
-  .then((favorites) => {  
-    // Tampilkan favorites di UI  
-    contentContainer.innerHTML = ''; // Kosongkan kontainer sebelumnya  
-  
-    favorites.forEach(favorite => {  
-      const favoriteElement = document.createElement('div');  
-      favoriteElement.textContent = `Anime: ${favorite.animeTitle}`;  
-      contentContainer.appendChild(favoriteElement);  
-    });  
-  })  
-  .catch((error) => {  
-    console.error('Error fetching favorites:', error);  
-    alert('Error fetching favorites. Please try again later.');  
-  });  
-});  
-
-function createReviewCard(review) {  
-
-  const animeCard = document.createElement('div');  
-  animeCard.classList.add('anime-card');  
-  animeCard.innerHTML = `  
-      <h3>${review.anime_title}</h3>  
-      <p style="font-weight: bold;">Genre: ${review.genre}</p>  
-      <p style="font-weight: bold;">Release Date: ${review.release_date}</p>  
-      <p style="font-weight: bold;">Rating: <span class="rating-display">${review.rating ? review.rating.toFixed(1) : 'N/A'}</span></p>  
-      <p class="anime-description">${review.content}</p>  
-      <button class="delete-button" data-review-id="${review.id}">Delete</button>  
-  `;  
-
-  // Tambahkan event listener untuk tombol delete  
-  animeCard.querySelector('.delete-button').addEventListener('click', () => {  
-      const reviewId = review.id; // Ambil ID review dari objek review  
-      console.log('Review ID to delete:', reviewId); // Log ID review  
-      deleteReview(reviewId); // Panggil fungsi deleteReview dengan ID yang benar  
   });  
 
-  return animeCard;  
-}  
-
-
-function editReview(reviewId) {  
-  const newContent = prompt("Enter new content for the review:");  
-  const newRating = prompt("Enter new rating for the review:");  
-
-  if (newContent && newRating) {  
-      fetch(`http://localhost:8080/review/${reviewId}`, { // Gunakan rute yang sesuai  
-          method: 'PUT',  
+  // Fetch reviews  
+  reviewsButton.addEventListener('click', () => {  
+      fetch('http://localhost:8080/review/reviews', {  
+          method: 'GET',  
           headers: {  
-              'Content-Type': 'application/json',  
-              'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`  
-          },  
-          body: JSON.stringify({  
-              content: newContent,  
-              rating: parseFloat(newRating)  
-          })  
+              'Authorization': `Bearer ${token}`  
+          }  
       })  
-      .then(response => {  
+      .then((response) => {  
           if (!response.ok) {  
-              throw new Error('Failed to update review');  
+              throw new Error('Failed to fetch reviews');  
           }  
           return response.json();  
       })  
-      .then(updatedReview => {  
-          console.log('Review updated:', updatedReview);  
-          reviewsButton.click(); // Refresh daftar review  
-      })  
-      .catch(error => {  
-          console.error('Error updating review:', error);  
-          alert('Error updating review. Please try again later.');  
-      });  
-  }  
-}  
+      .then((reviews) => {  
+          const animeList = document.getElementById('anime-list');  
+          animeList.innerHTML = ''; // Kosongkan kontainer sebelumnya  
 
-function deleteReview(reviewId) {    
-  if (confirm("Are you sure you want to delete this review?")) {    
-      console.log('Deleting review with ID:', reviewId); // Log ID review  
-      fetch(`http://localhost:8080/review/${reviewId}`, { // Gunakan rute yang sesuai    
-          method: 'DELETE',    
-          headers: {    
-              'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`    
+          reviews.forEach(review => {  
+              const reviewCard = createReviewCard(review);  
+              animeList.appendChild(reviewCard);  
+          });  
+      })  
+      .catch((error) => {  
+          console.error('Error fetching reviews:', error);  
+      });  
+  });  
+
+  // Create review card  
+  function createReviewCard(review) {  
+      const animeCard = document.createElement('div');  
+      animeCard.classList.add('anime-card');  
+      animeCard.innerHTML = `  
+          <h3>${review.anime_title}</h3>  
+          <p style="font-weight: bold;">Genre: ${review.genre}</p>  
+          <p style="font-weight: bold;">Release Date: ${review.release_date}</p>  
+          <p style="font-weight: bold;">Rating: <span class="rating-display">${review.rating ? review.rating.toFixed(1) : 'N/A'}</span></p>  
+          <p class="anime-description">${review.content}</p>  
+          <button class="delete-button" data-review-id="${review.id}">Delete</button>  
+      `;  
+
+      // Tambahkan event listener untuk menampilkan modal saat kartu diklik  
+      animeCard.addEventListener('click', () => {  
+          currentEditId = review.id; // Simpan ID review yang sedang diedit  
+          document.getElementById('modal-title').innerText = 'Edit Review'; // Set title untuk editing  
+          document.getElementById('content').value = review.content; // Isi form dengan data review  
+          document.getElementById('rating').value = review.rating; // Isi rating  
+          updateStarDisplay(document.getElementById('star-rating'), review.rating); // Update tampilan bintang    
+          modalOverlay.classList.remove('hidden'); // Tampilkan modal      
+      });  
+
+      // Tambahkan event listener untuk tombol delete  
+      animeCard.querySelector('.delete-button').addEventListener('click', (event) => {  
+          event.stopPropagation(); // Mencegah event click pada card  
+          const reviewId = review.id;  
+          console.log('Review ID to delete:', reviewId);  
+          deleteReview(reviewId);  
+      });  
+
+      return animeCard;  
+  }  
+
+  // Hide modal  
+  modalCancel.addEventListener('click', () => {  
+      modalOverlay.classList.add('hidden'); // Sembunyikan modal  
+      modalForm.reset(); // Reset form saat menutup  
+  });  
+
+  // Update star display function    
+  function updateStarDisplay(starRating, ratingValue) {    
+      const stars = starRating.querySelectorAll('.star');    
+      stars.forEach(star => {    
+          const value = parseFloat(star.getAttribute('data-value'));    
+          if (value <= ratingValue) {    
+              star.style.color = 'gold';    
+          } else {    
+              star.style.color = 'gray';    
           }    
-      })    
-      .then(response => {    
-          if (!response.ok) {    
-              throw new Error('Failed to delete review');    
-          }    
-          console.log('Review deleted');    
-          reviewsButton.click(); // Refresh daftar review    
       });    
   }    
-}  
 
+  // Star rating for modal    
+  const starRating = document.getElementById('star-rating');    
+  starRating.addEventListener('click', (event) => {    
+      const target = event.target;    
+      if (target.classList.contains('star')) {    
+          const ratingValue = parseFloat(target.getAttribute('data-value'));    
+          document.getElementById('rating').value = ratingValue; // Update hidden input with rating value    
+          updateStarDisplay(starRating, ratingValue); // Update star display    
+      }    
+  });  
 
-
-
-
+  // Fungsi untuk menghapus review  
+  function deleteReview(reviewId) {  
+      fetch(`http://localhost:8080/review/${reviewId}`, {  
+          method: 'DELETE',  
+          headers: {  
+              'Authorization': `Bearer ${token}`  
+          }  
+      })  
+      .then(response => {  
+          if (!response.ok) {  
+              throw new Error('Failed to delete review');  
+          }  
+          alert('Review deleted successfully!');  
+          // Refresh the reviews list after deletion  
+          reviewsButton.click();  
+      })  
+      .catch(error => {  
+          console.error('Error deleting review:', error);  
+          alert('Error deleting review. Please try again.');  
+      });  
+  }  
+});  
