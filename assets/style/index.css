@@ -1,212 +1,202 @@
-/* General Styles */
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f4f4f9;
-}
-
-header {
-  background-color: #333;
-  color: #fff;
-  padding: 1rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-header h1 {
-  margin: 0;
-}
-
-header nav {
-  display: flex;
-  align-items: center;
-}
-
-header nav a {
-  color: white;
-  text-decoration: none;
-  margin-left: 1rem;
-}
-
-header nav a:hover {
-  text-decoration: underline; /* Underline on hover */
-}
-
-/* Main Section */
-main {
-  padding: 2rem;
-}
-
-.judul {
-  text-decoration: none;
-  color: inherit;
+/* General Styles */  
+body {  
+  font-family: Arial, sans-serif;  
+  margin: 0;  
+  padding: 0;  
+  background-color: #f4f4f9;  
+}  
   
-}
-
-#search {
-  display: flex; /* Use flexbox for alignment */
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
-  margin-bottom: 1.5rem; /* Space below search section */
-}
-
-#search-bar {
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  margin-right: 0.5rem;
-  width: 200px; /* Fixed width for search bar */
-}
-
-#genre-dropdown {
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  margin-right: 0.5rem;
-  width: 150px; /* Fixed width for search bar */
-}
-
-#search-year {
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  margin-right: 0.5rem;
-  width: 150px; /* Fixed width for search bar */
-}
-
-#search-button {
-  background-color: #ff5757;
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  border-radius: 4px;
-  transition: background-color 0.3s;
-}
-
-#search-button:hover {
-  background-color: #e74c3c; /* Darker red on hover */
-}
-
-/* Modal Styles */
-.modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1000; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgba(0, 0, 0, 0.7); /* Black w/ opacity */
-  transition: opacity 0.3s ease; /* Smooth transition for opacity */
-}
-
-.modal-content {
-  background-color: #fff;
-  margin: 10% auto; /* Center the modal */
-  padding: 20px;
-  border-radius: 8px; /* Rounded corners */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  width: 80%; /* Width of the modal */
-  max-width: 600px; /* Maximum width */
-  transform: scale(0); /* Start scaled down */
-  transition: transform 0.3s ease; /* Smooth transition for scaling */
-}
-
-.modal-content.show {
-  transform: scale(1); /* Scale to normal size when shown */
-}
-
-.close-button {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.close-button:hover,
-.close-button:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-
-.anime-list {
-  display: flex; /* Use flexbox for horizontal layout */
-  flex-wrap: wrap; /* Allow wrapping to the next line */
-  gap: 1rem; /* Space between cards */
-  justify-content: center; /* Center items on smaller screens */
-}
-
-.anime-card {
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Hapus bayangan default */
-  width: calc(33.33% - 1rem); /* Set width to 1/3 of the container with reduced gap */
-  height: 200px; /* Fixed height for cards */
-  padding: 1rem;
-  cursor: pointer; /* Pointer cursor for interactive cards */
-  position: relative;
-  transition: transform 0.1s, box-shadow 0.2s; /* Tambahkan transisi untuk bayangan */
-  overflow: hidden; /* Ensure content doesn't overflow */
-  display: flex;
-  flex-direction: column; /* Stack children vertically */
-}
-
-.anime-card:hover {
-  transform: scale(1.01); /* Slightly enlarge on hover */
-}
-
-
-.anime-card h3 {
-  margin: 0 0 0.5rem;
-  font-size: 1.25rem;
-}
-
-.anime-card p {
-  margin: 0.25rem 0;
-  font-size: 0.9rem;
-  color: #555;
-  max-height: 400px; /* Limit height for description */
-  overflow-y: auto; /* Enable scrolling for long descriptions */
-}
-
-.anime-card p:nth-child(2), /* Genre */
-.anime-card p:nth-child(3) { /* Release Date */
-  margin-bottom: 0.5rem; /* Add space below genre and release date */
-}
-
-/* Responsive Design */
-@media (min-width: 768px) {
-  header h1 {
-    font-size: 2.2rem;
-  }
-
-  .anime-list {
-    justify-content: space-evenly; /* Space evenly on larger screens */
-  }
-
-  .anime-card {
-    width: calc(33.33% - 1rem); /* Three cards per row */
-  }
-}
-
-@media (max-width: 768px) {
-  .anime-card {
-    width: calc(50% - 1rem); /* Two cards per row on medium screens */
-  }
-}
-
-@media (max-width: 480px) {
-  .anime-card {
-    width: calc(100% - 1rem); /* Full width on small screens */
-  }
-
-  .modal-content {
-    width: 95%; /* Make modal slightly wider on very small screens */
-  }
-}
+header {  
+  background-color: #333;  
+  color: #fff;  
+  padding: 1rem;  
+  display: flex;  
+  justify-content: space-between;  
+  align-items: center;  
+  flex-wrap: wrap; /* Allow wrapping for smaller screens */  
+}  
+  
+header h1 {  
+  margin: 0;  
+  flex: 1; /* Allow header title to take available space */  
+}  
+  
+header nav {  
+  display: flex;  
+  align-items: center;  
+  flex-wrap: wrap; /* Allow wrapping for smaller screens */  
+}  
+  
+header nav a {  
+  color: white;  
+  text-decoration: none;  
+  margin-left: 1rem;  
+}  
+  
+header nav a:hover {  
+  text-decoration: underline; /* Underline on hover */  
+}  
+  
+/* Main Section */  
+main {  
+  padding: 2rem;  
+}  
+  
+.judul {  
+  text-decoration: none;  
+  color: inherit;  
+}  
+  
+#search {  
+  display: flex; /* Use flexbox for alignment */  
+  justify-content: center; /* Center horizontally */  
+  align-items: center; /* Center vertically */  
+  margin-bottom: 1.5rem; /* Space below search section */  
+  flex-wrap: wrap; /* Allow wrapping for smaller screens */  
+}  
+  
+#search-bar,  
+#genre-dropdown,  
+#search-year {  
+  padding: 0.5rem;  
+  border: 1px solid #ccc;  
+  border-radius: 4px;  
+  margin-right: 0.5rem;  
+  width: 150px; /* Default width for inputs */  
+}  
+  
+#search-button {  
+  background-color: #ff5757;  
+  color: white;  
+  border: none;  
+  padding: 0.5rem 1rem;  
+  cursor: pointer;  
+  border-radius: 4px;  
+  transition: background-color 0.3s;  
+}  
+  
+#search-button:hover {  
+  background-color: #e74c3c; /* Darker red on hover */  
+}  
+  
+/* Modal Styles */  
+.modal {  
+  display: none; /* Hidden by default */  
+  position: fixed; /* Stay in place */  
+  z-index: 1000; /* Sit on top */  
+  left: 0;  
+  top: 0;  
+  width: 100%; /* Full width */  
+  height: 100%; /* Full height */  
+  overflow: auto; /* Enable scroll if needed */  
+  background-color: rgba(0, 0, 0, 0.7); /* Black w/ opacity */  
+  transition: opacity 0.3s ease; /* Smooth transition for opacity */  
+}  
+  
+.modal-content {  
+  background-color: #fff;  
+  margin: 10% auto; /* Center the modal */  
+  padding: 20px;  
+  border-radius: 8px; /* Rounded corners */  
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  
+  width: 80%; /* Width of the modal */  
+  max-width: 600px; /* Maximum width */  
+  transform: scale(0); /* Start scaled down */  
+  transition: transform 0.3s ease; /* Smooth transition for scaling */  
+} 
+  
+.modal-content.show {  
+  transform: translateY(15%) scale(1); /* Center vertically and scale to normal size when shown */  
+}    
+  
+.close-button {  
+  color: #aaa;  
+  float: right;  
+  font-size: 28px;  
+  font-weight: bold;  
+}  
+  
+.close-button:hover,  
+.close-button:focus {  
+  color: black;  
+  text-decoration: none;  
+  cursor: pointer;  
+}  
+  
+.anime-list {  
+  display: flex; /* Use flexbox for horizontal layout */  
+  flex-wrap: wrap; /* Allow wrapping to the next line */  
+  gap: 1rem; /* Space between cards */  
+  justify-content: center; /* Center items on smaller screens */  
+}  
+  
+.anime-card {  
+  background-color: #fff;  
+  border-radius: 8px;  
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);  
+  width: calc(33.33% - 1rem); /* Set width to 1/3 of the container with reduced gap */  
+  height: 200px; /* Fixed height for cards */  
+  padding: 1rem;  
+  cursor: pointer; /* Pointer cursor for interactive cards */  
+  position: relative;  
+  transition: transform 0.1s, box-shadow 0.2s;  
+  overflow: hidden; /* Ensure content doesn't overflow */  
+  display: flex;  
+  flex-direction: column; /* Stack children vertically */  
+}  
+  
+.anime-card:hover {  
+  transform: scale(1.01); /* Slightly enlarge on hover */  
+}  
+  
+.anime-card h3 {  
+  margin: 0 0 0.5rem;  
+  font-size: 1.25rem;  
+}  
+  
+.anime-card p {  
+  margin: 0.25rem 0;  
+  font-size: 0.9rem;  
+  color: #555;  
+  max-height: 400px; /* Limit height for description */  
+  overflow-y: auto; /* Enable scrolling for long descriptions */  
+}  
+  
+.anime-card p:nth-child(2), /* Genre */  
+.anime-card p:nth-child(3) { /* Release Date */  
+  margin-bottom: 0.5rem; /* Add space below genre and release date */  
+}  
+  
+/* Responsive Design */  
+@media (max-width: 768px) { 
+  .modal-content {  
+    width: 85%; /* Adjust width for mobile screens */  
+    margin: auto; /* Center with reduced margin */  
+  } 
+  header h1 {  
+    font-size: 1.8rem; /* Adjust header size for smaller screens */  
+  }  
+  
+  #search-bar,  
+  #genre-dropdown,  
+  #search-year {  
+    width: 100%; /* Full width for inputs on small screens */  
+    margin-bottom: 0.5rem; /* Space below inputs */  
+  }  
+  
+  .anime-card {  
+    width: calc(50% - 1rem); /* Two cards per row on medium screens */  
+  }  
+}  
+  
+@media (max-width: 480px) {  
+  .anime-card {  
+    width: calc(100% - 1rem); /* Full width on small screens */  
+  }  
+  
+  .modal-content {  
+    width: 90%; /* Make modal slightly wider on very small screens */  
+    margin: auto;
+    padding: 15px /* Further reduce margin for very small screens */  
+  } 
+}  
