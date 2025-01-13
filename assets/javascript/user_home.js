@@ -1,8 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {  
     const adminAnimeList = document.getElementById('anime-list');  
     const searchBar = document.getElementById('search-bar');  
-    const searchButton = document.getElementById('search-button');  
-    const adminLogoutButton = document.getElementById('logout');  
+    const searchButton = document.getElementById('search-button');    
     const profileButton = document.getElementById('profile');  
   
     // Cek apakah pengguna sudah login  
