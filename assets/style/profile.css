@@ -136,9 +136,13 @@ main {
   margin: 0.25rem 0;  
   font-size: 0.9rem;  
   color: #555;  
-  max-height: 400px; /* Limit height for description */  
-  overflow-y: auto; /* Enable scrolling for long descriptions */  
+  max-height: 60px; /* Batasi tinggi deskripsi */  
+  overflow-y: auto; /* Izinkan scroll jika konten melebihi tinggi */  
+  display: -webkit-box; /* Untuk mendukung WebKit */  
+  -webkit-box-orient: vertical; /* Orientasi kotak vertikal */  
+  -webkit-line-clamp: 3; /* Batasi jumlah baris yang ditampilkan */  
 }  
+
 .anime-card button {
   position: relative;
   top: 8px;
