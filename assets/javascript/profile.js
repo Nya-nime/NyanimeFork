@@ -1,8 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {    
     const logoutButton = document.getElementById('logout');    
     const reviewsButton = document.getElementById('reviewsButton');    
-    const favoriteButton = document.getElementById('favoriteButton');    
-    const favoritesButton = document.getElementById('favoritesButton'); // Tombol untuk mendapatkan favorit    
+    const favoriteButton = document.getElementById('favoriteButton');       
     const modalOverlay = document.getElementById('modal-overlay');    
     const modalForm = document.getElementById('review-form');    
     const modalCancel = document.getElementById('cancel-button');    
@@ -32,7 +31,8 @@ document.addEventListener('DOMContentLoaded', () => {
         return response.json();    
     })    
     .then((data) => {    
-        document.querySelector('.username').textContent = data.username;    
+        document.querySelector('.username').textContent = data.username;  
+        document.querySelector('.bio').textContent = data.bio;  
     })    
     .catch((error) => {    
         console.error('Error fetching profile data:', error);    
@@ -302,10 +302,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });    
     }    
     
-    // Event listener untuk tombol Edit Profile    
+
     editProfileButton.addEventListener('click', () => {    
-        // Logika untuk mengedit profil pengguna    
-        // Misalnya, Anda bisa membuka modal untuk mengedit profil    
-        alert('Edit Profile functionality is not implemented yet.');    
+        window.location.href = 'edit_profile.html';
     });    
 });    

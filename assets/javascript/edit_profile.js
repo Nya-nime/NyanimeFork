@@ -1,46 +1,75 @@
-// Select the form element
-const editProfileForm = document.getElementById('editProfileForm');
+document.addEventListener("DOMContentLoaded", async () => {    
+  const editProfileForm = document.getElementById("editProfileForm");    
+  const usernameInput = document.getElementById("username");
+  const bioTextarea = document.getElementById("bio");
+  const token = localStorage.getItem('jwtToken');
 
-// Mock existing data for demonstration
-const mockData = {
-  username: "Haekall",
-  bio: "This is a sample bio.",
-  profilePic: "path/to/current-profile-pic.jpg"
-};
+  try {    
+    // Fetch user profile data from server    
+    const response = await fetch("http://localhost:8080/user/profile", {    
+      method: "GET",    
+      headers: {    
+        "Content-Type": "application/json",    
+        "Authorization": `Bearer ${token}`    
+      }    
+    });    
+    
+    if (response.ok) {    
+      const data = await response.json();    
+    
+      // Populate form with user data    
+      usernameInput.value = data.username || "";    
+      bioTextarea.value = data.bio || "";    
+    } else {    
+      const errorText = await response.text();    
+      console.error("Failed to fetch profile:", errorText);    
+      alert("Failed to load profile data.");    
+    }    
+  } catch (error) {    
+    console.error("Error fetching profile data:", error);    
+    alert("An error occurred while fetching profile data.");    
+  }    
 
-// Pre-fill the form with existing data
-window.onload = () => {
-  document.getElementById('username').value = mockData.username;
-  document.getElementById('bio').value = mockData.bio;
-};
-
-// Handle form submission
-editProfileForm.addEventListener('submit', (event) => {
-  event.preventDefault();
-
-  const username = document.getElementById('username').value;
-  const bio = document.getElementById('bio').value;
-  const profilePic = document.getElementById('profilePic').files[0];
-
-  // Create a form data object
-  const formData = new FormData();
-  formData.append('username', username);
-  formData.append('bio', bio);
-  if (profilePic) {
-    formData.append('profilePic', profilePic);
-  }
-
-  // Simulate saving changes
-  fetch('/api/user/edit-profile', {
-    method: 'POST',
-    body: formData
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      alert('Profile updated successfully!');
-      window.location.href = 'profile.html';
-    })
-    .catch((error) => {
-      console.error('Error updating profile:', error);
-    });
-});
+  // Handle form submission
+  editProfileForm.addEventListener("submit", async (event) => {    
+    event.preventDefault(); // Prevent default form submission    
+    
+    const username = usernameInput.value;    
+    const bio = bioTextarea.value;    
+    
+    const data = {    
+      username: username,    
+      bio: bio    
+    };    
+    
+    try {    
+      const response = await fetch("http://localhost:8080/user/edit", {    
+        method: "PUT",    
+        headers: {    
+          "Content-Type": "application/json",    
+          'Authorization': `Bearer ${token}`   
+        },    
+        body: JSON.stringify(data)    
+      });    
+    
+      if (response.ok) {    
+        alert("Profile updated successfully!");    
+      } else {    
+        const errorText = await response.text();    
+        let errorMessage;    
+    
+        try {    
+          const error = JSON.parse(errorText);    
+          errorMessage = error.message;    
+        } catch (e) {    
+          errorMessage = errorText;    
+        }    
+    
+        alert(`Error: ${errorMessage}`);    
+      }    
+    } catch (error) {    
+      console.error("Error updating profile:", error);    
+      alert("An error occurred while updating the profile.");    
+    }    
+  });    
+});  
