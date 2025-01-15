@@ -1,245 +1,264 @@
-/* General Styles */
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f4f4f9; /* Warna latar belakang */
-}
-
-header {
-  background-color: #333; /* Warna latar belakang header */
-  color: #fff; /* Warna teks header */
-  padding: 1rem; /* Padding untuk header */
-  display: flex; /* Menggunakan flexbox untuk tata letak */
-  justify-content: space-between; /* Menyebar item di header */
-  align-items: center; /* Menyelaraskan item secara vertikal */
-}
-
-header h1 {
-  margin: 0; /* Menghapus margin pada judul */
-}
-
-header nav {
-  display: flex; /* Menggunakan flexbox untuk navbar */
-  align-items: center; /* Menyelaraskan item secara vertikal */
-}
-
-header nav button {
-  background-color: #ff5757; /* Warna latar belakang tombol */
-  color: white; /* Warna teks tombol */
-  border: none; /* Menghapus border */
-  padding: 0.5rem 1rem; /* Padding untuk tombol */
-  cursor: pointer; /* Menampilkan pointer saat hover */
-  border-radius: 4px; /* Sudut membulat */
-  transition: background-color 0.3s; /* Transisi untuk efek hover */
-  margin-left: 1rem; /* Jarak antar tombol */
-}
-
-header nav button:hover {
-  background-color: #e74c3c; /* Warna latar belakang saat hover */
-}
-
-/* Main Section */
-main {
-  padding: 2rem; /* Padding untuk main */
-}
-
-.judul {
-  text-decoration: none;
-  color: inherit;
-}
-
-.profile-section {
-  display: flex; /* Menggunakan flexbox untuk bagian profil */
-  flex-direction: column; /* Menyusun item secara vertikal */
-  align-items: center; /* Menyelaraskan item secara horizontal */
-}
-
-.profile-header {
-  display: flex; /* Menggunakan flexbox untuk header profil */
-  align-items: center; /* Menyelaraskan item secara vertikal */
-  margin-bottom: 2rem; /* Jarak di bawah header profil */
-}
-
-.profile-pic {
-  width: 100px; /* Ukuran gambar profil */
-  height: 100px; /* Ukuran gambar profil */
-  border-radius: 50%; /* Membuat gambar menjadi bulat */
-  margin-right: 1rem; /* Jarak antara gambar dan info */
-}
-
-.profile-info {
-  display: flex; /* Menggunakan flexbox untuk info profil */
-  flex-direction: column; /* Menyusun item secara vertikal */
-}
-
-.username {
-  font-size: 1.5rem; /* Ukuran font untuk nama pengguna */
-  margin: 0; /* Menghapus margin */
-}
-
-/* Profile Stats Button Styles */
-.profile-stats {
-  margin-top: 1rem; /* Jarak di atas stats */
-  display: flex; /* Menggunakan flexbox untuk tata letak horizontal */
-  justify-content: space-around; /* Menyebar tombol secara merata */
-  width: 100%; /* Lebar penuh */
-  max-width: 600px; /* Lebar maksimum untuk stats */
-}
-
-.profile-button {
-  background-color: #ff5757; /* Warna latar belakang tombol */
-  color: white; /* Warna teks tombol */
-  border: none; /* Menghapus border */
-  padding: 0.5rem 1rem; /* Padding untuk tombol */
-  cursor: pointer; /* Menampilkan pointer saat hover */
-  border-radius: 4px; /* Sudut membulat */
-  transition: background-color 0.3s; /* Transisi untuk efek hover */
-}
-
-.profile-button:hover {
-  background-color: #e74c3c; /* Warna latar belakang saat hover */
-}
-
-.anime-list {  
-  display: flex; /* Use flexbox for horizontal layout */  
-  flex-wrap: wrap; /* Allow wrapping to the next line */  
-  gap: 1rem; /* Space between cards */  
-  justify-content: center; /* Center items on smaller screens */  
-}  
-  
-.anime-card {  
-  background-color: #fff;  
-  border-radius: 8px;  
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);  
-  width: calc(33.33% - 1rem); /* Set width to 1/3 of the container with reduced gap */  
-  height: 200px; /* Fixed height for cards */  
-  padding: 1rem;  
-  cursor: pointer; /* Pointer cursor for interactive cards */  
-  position: relative;  
-  transition: transform 0.1s, box-shadow 0.2s;  
-  overflow: hidden; /* Ensure content doesn't overflow */  
-  display: flex;  
-  flex-direction: column; /* Stack children vertically */  
-}  
-  
-.anime-card:hover {  
-  transform: scale(1.01); /* Slightly enlarge on hover */  
-}  
-  
-.anime-card h3 {  
-  margin: 0 0 0.5rem;  
-  font-size: 1.25rem;  
-}  
-  
-.anime-card p {  
-  margin: 0.25rem 0;  
-  font-size: 0.9rem;  
-  color: #555;  
-  max-height: 60px; /* Batasi tinggi deskripsi */  
-  overflow-y: auto; /* Izinkan scroll jika konten melebihi tinggi */  
-  display: -webkit-box; /* Untuk mendukung WebKit */  
-  -webkit-box-orient: vertical; /* Orientasi kotak vertikal */  
-  -webkit-line-clamp: 3; /* Batasi jumlah baris yang ditampilkan */  
-}  
-
-.anime-card button {
-  position: relative;
-  top: 8px;
-  right: 1px;
-  background-color: #dc3545;
-  color: white;
-  border: none;
-  padding: 0.25rem 0.5rem;
-  cursor: pointer;
-  font-size: 0.75rem;
-  border-radius: 5%;
-}
-
-/* Fullscreen Overlay */
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000; /* Ensure it is on top of other content */
-}
-
-/* Hidden State (Default) */
-.hidden {
-  display: none; /* Hide the modal when it has the 'hidden' class */
-}
-
-/* Modal Box */
-.modal-content {
-  background: #fff;
-  padding: 20px;
-  border-radius: 10px;
-  width: 90%;
-  max-width: 500px; /* Adjusted width */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  position: relative;
-}
-
-/* Input Fields and Textarea */
-.modal-content input[type="text"],
-.modal-content input[type="date"],
-.modal-content textarea {
-  width: 100%; /* Make inputs take full width */
-  padding: 10px; /* Add padding for better spacing */
-  margin-bottom: 15px; /* Space between fields */
-  border: 1px solid #ccc; /* Border color */
-  border-radius: 4px; /* Rounded corners */
-  box-sizing: border-box; /* Include padding and border in element's total width and height */
-}
-
-/* Labels */
-.modal-content label {
-  margin-bottom: 5px; /* Space between label and input */
-  display: block; /* Make labels block elements */
-}
-
-/* Buttons */
-.modal-buttons {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
-}
-
-.modal-buttons button {
-  flex: 1;
-  margin: 0 5px;
-  padding: 10px;
-  background: #4CAF50; /* Green for save button */
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.modal-buttons button:hover {
-  background: #45a049; /* Darker green on hover */
-}
-
-.modal-buttons #cancel-button {
-  background: #dc3545; /* Red for cancel */
-}
-
-.modal-buttons #cancel-button:hover {
-  background: #c82333; /* Darker red on hover */
-}
-/* CSS untuk bintang */  
-.star {  
-  font-size: 24px; /* Ukuran bintang */  
-  color: gray; /* Warna default bintang */  
-  cursor: pointer; /* Mengubah kursor menjadi pointer saat di-hover */  
-}  
-
-.star:hover {  
-  color: gold; /* Warna bintang saat di-hover */  
-}  
+/* General Styles */    
+body {    
+  font-family: Arial, sans-serif;    
+  margin: 0;    
+  padding: 0;    
+  background-color: #f4f4f9;    
+}    
+    
+header {    
+  background-color: #333;    
+  color: #fff;    
+  padding: 1rem;    
+  display: flex;    
+  justify-content: space-between;    
+  align-items: center;    
+  flex-wrap: wrap; /* Allow wrapping for smaller screens */    
+}    
+    
+header h1 {    
+  margin: 0;    
+  flex: 1; /* Allow header title to take available space */    
+}    
+    
+header nav {    
+  display: flex;    
+  align-items: center;    
+  flex-wrap: wrap; /* Allow wrapping for smaller screens */    
+}    
+    
+header nav button {    
+  background-color: #ff5757;    
+  color: white;    
+  border: none;    
+  padding: 0.5rem 1rem;    
+  cursor: pointer;    
+  border-radius: 4px;    
+  transition: background-color 0.3s;    
+  margin-left: 0.5rem; /* Adjusted margin for spacing */    
+}    
+    
+header nav button:hover {    
+  background-color: #e74c3c; /* Darker red on hover */    
+}    
+    
+/* Main Section */    
+main {    
+  padding: 2rem;    
+}    
+    
+.judul {    
+  text-decoration: none;    
+  color: inherit;    
+}    
+    
+.profile-section {    
+  display: flex;    
+  flex-direction: column;    
+  align-items: center;    
+}    
+    
+.profile-header {    
+  display: flex;    
+  align-items: center;    
+  margin-bottom: 2rem;    
+}      
+    
+.profile-info {    
+  display: flex;    
+  flex-direction: column;    
+}    
+    
+.username {    
+  font-size: 1.5rem;    
+  margin: 0;    
+}    
+    
+/* Profile Stats Button Styles */    
+.profile-stats {    
+  margin-top: 1rem;    
+  display: flex;    
+  justify-content: space-around;    
+  width: 100%;    
+  max-width: 600px;    
+}    
+    
+.profile-button {    
+  background-color: #ff5757;    
+  color: white;    
+  border: none;    
+  padding: 0.5rem 1rem;    
+  cursor: pointer;    
+  border-radius: 4px;    
+  transition: background-color 0.3s;    
+}    
+    
+.profile-button:hover {    
+  background-color: #e74c3c; /* Darker red on hover */    
+}    
+    
+.anime-list {    
+  display: flex;    
+  flex-wrap: wrap; /* Allow wrapping to the next line */    
+  gap: 1rem; /* Space between cards */    
+  justify-content: center; /* Center items on smaller screens */    
+}    
+    
+.anime-card {    
+  background-color: #fff;    
+  border-radius: 8px;    
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);    
+  width: calc(33.33% - 1rem); /* Set width to 1/3 of the container with reduced gap */    
+  height: 200px; /* Fixed height for cards */    
+  padding: 1rem;    
+  cursor: pointer;    
+  position: relative;    
+  transition: transform 0.1s, box-shadow 0.2s;    
+  overflow: hidden;    
+  display: flex;    
+  flex-direction: column; /* Stack children vertically */    
+  margin-top: 20px;    
+}    
+    
+.anime-card:hover {    
+  transform: scale(1.01); /* Slightly enlarge on hover */    
+}    
+    
+.anime-card h3 {    
+  margin: 0 0 0.5rem;    
+  font-size: 1.25rem;    
+}    
+    
+.anime-card p {    
+  margin: 0.25rem 0;    
+  font-size: 0.9rem;    
+  color: #555;    
+  max-height: 60px; /* Limit height for description */    
+  overflow-y: auto; /* Enable scrolling for long descriptions */    
+  display: -webkit-box; /* For WebKit support */    
+  -webkit-box-orient: vertical; /* Vertical box orientation */    
+  -webkit-line-clamp: 3; /* Limit number of displayed lines */    
+}    
+    
+.anime-card button {    
+  position: relative;    
+  top: 8px;    
+  right: 1px;    
+  background-color: #dc3545;    
+  color: white;    
+  border: none;    
+  padding: 0.25rem 0.5rem;    
+  cursor: pointer;    
+  font-size: 0.75rem;    
+  border-radius: 4px; /* Adjusted for consistency */    
+  margin-top: 10px; /* Added margin for spacing between button and card content */    
+}    
+    
+/* Fullscreen Overlay */    
+.modal {    
+  position: fixed;    
+  top: 0;    
+  left: 0;    
+  width: 100%;    
+  height: 100%;    
+  background: rgba(0, 0, 0, 0.6);    
+  display: flex;    
+  justify-content: center;    
+  align-items: center;    
+  z-index: 1000;    
+}    
+    
+/* Hidden State (Default) */    
+.hidden {    
+  display: none; /* Hide the modal when it has the 'hidden' class */    
+}    
+    
+/* Modal Box */    
+.modal-content {    
+  background: #fff;    
+  padding: 20px;    
+  border-radius: 10px;    
+  width: 90%;    
+  max-width: 500px;    
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);    
+}    
+    
+/* Input Fields and Textarea */    
+.modal-content input[type="text"],    
+.modal-content input[type="date"],    
+.modal-content textarea {    
+  width: 100%;    
+  padding: 10px;    
+  margin-bottom: 15px;    
+  border: 1px solid #ccc;    
+  border-radius: 4px;    
+  box-sizing: border-box;    
+}    
+    
+/* Labels */    
+.modal-content label {    
+  margin-bottom: 5px;    
+  display: block;    
+}    
+    
+/* Buttons */    
+.modal-buttons {    
+  display: flex;    
+  justify-content: space-between;    
+  margin-top: 20px;    
+}    
+    
+.modal-buttons button {    
+  flex: 1;    
+  margin: 0 5px;    
+  padding: 10px;    
+  background: #4CAF50; /* Green for save button */    
+  color: white;    
+  border: none;    
+  border-radius: 4px;    
+  cursor: pointer;    
+}    
+    
+.modal-buttons button:hover {    
+  background: #45a049; /* Darker green on hover */    
+}    
+    
+.modal-buttons #cancel-button {    
+  background: #dc3545; /* Red for cancel */    
+}    
+    
+.modal-buttons #cancel-button:hover {    
+  background: #c82333; /* Darker red on hover */    
+}    
+    
+/* CSS for Stars */    
+.star {    
+  font-size: 24px; /* Star size */    
+  color: gray; /* Default star color */    
+  cursor: pointer; /* Pointer cursor on hover */    
+}    
+    
+.star:hover {    
+  color: gold; /* Star color on hover */    
+}    
+    
+/* Responsive Design */    
+@media (max-width: 768px) {    
+  .anime-card {    
+    width: calc(50% - 1rem); /* Two cards per row on medium screens */    
+  }    
+}    
+    
+@media (max-width: 480px) {    
+  header h1 {    
+    font-size: 1.8rem; /* Smaller header size for small screens */    
+  }    
+    
+  .anime-card {    
+    width: calc(100% - 1rem); /* Full width on small screens */    
+  }    
+    
+  .modal-content {    
+    width: 95%; /* Make modal slightly wider on very small screens */    
+  }    
+}    
