@@ -10,10 +10,10 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentEditId = null;    
     
     // Cek apakah pengguna sudah login    
-    const token = localStorage.getItem('jwtToken');    
-    if (!token) {    
-        window.location.href = 'login.html'; // Ganti dengan URL halaman login Anda    
-    }    
+    // const token = localStorage.getItem('jwtToken');    
+    // if (!token) {    
+    //     window.location.href = 'llogin.html'; // Ganti dengan URL halaman login Anda    
+    // }    
     
     // Fetch profile data    
     console.log('Fetching profile data...');    

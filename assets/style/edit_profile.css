@@ -1,87 +1,104 @@
-/* Reset Styles */
-body, h1, form, input, textarea, button {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  body {
-    font-family: Arial, sans-serif;
-    background-color: #1c1c1c;
-    color: #ffffff;
-  }
-  
-  /* Navbar */
-  .navbar {
-    background-color: #2c2c2c;
-    padding: 1rem 2rem;
-  }
-  
-  .navbar .logo a {
-    color: #9ac7ff;
-    text-decoration: none;
-    font-size: 1.2rem;
-  }
-  
-  .navbar .logo a:hover {
-    text-decoration: underline;
-  }
-  
-  /* Edit Profile Section */
-  .edit-profile-section {
-    max-width: 600px;
-    margin: 3rem auto;
-    text-align: center;
-  }
-  
-  .edit-profile-section h1 {
-    margin-bottom: 2rem;
-    font-size: 2rem;
-  }
-  
-  form {
-    background-color: #2c2c2c;
-    padding: 2rem;
-    border-radius: 8px;
-  }
-  
-  .form-group {
-    margin-bottom: 1.5rem;
-    text-align: left;
-  }
-  
-  .form-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-size: 1rem;
-  }
-  
-  .form-group input,
-  .form-group textarea {
-    width: 100%;
-    padding: 0.5rem;
-    font-size: 1rem;
-    border: 1px solid #9ac7ff;
-    border-radius: 4px;
-    background-color: #1c1c1c;
-    color: #ffffff;
-  }
-  
-  textarea {
-    resize: none;
-  }
-  
-  .save-btn {
-    background-color: #9ac7ff;
-    color: #1c1c1c;
-    padding: 0.7rem 1.5rem;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1rem;
-  }
-  
-  .save-btn:hover {
-    background-color: #7eb5ff;
-  }
-  
+/* Reset Styles */  
+body, h1, form, input, textarea, button {  
+  margin: 0;  
+  padding: 0;  
+  box-sizing: border-box;  
+}  
+
+body {  
+  font-family: Arial, sans-serif;  
+  background-color: #f4f4f9; /* Change to match your desired background */  
+  color: #333; /* Change to match your desired text color */  
+}  
+
+header {    
+  background-color: #333;    
+  color: #fff;    
+  padding: 1rem;    
+  display: flex;    
+  justify-content: space-between;    
+  align-items: center;    
+  flex-wrap: wrap; /* Allow wrapping for smaller screens */    
+}    
+
+/* Navbar */  
+.navbar {  
+  background-color: #333; /* Dark background for navbar */  
+  padding: 1rem 2rem;  
+  display: flex;  
+  align-items: center;  
+}  
+
+.navbar .logo a {  
+  color: #ffffff; /* White text for the link */  
+  text-decoration: none;  
+  font-size: 1.5rem;  
+}  
+
+.navbar .logo a:hover {  
+  text-decoration: underline;  
+}  
+
+/* Edit Profile Section */  
+.edit-profile-section {  
+  max-width: 600px;  
+  margin: 3rem auto;  
+  text-align: center;  
+}  
+
+.edit-profile-section h1 {  
+  margin-bottom: 2rem;  
+  font-size: 2rem;  
+}  
+
+form {  
+  background-color: white; /* Dark background for form */  
+  padding: 2rem;  
+  border-radius: 8px;  
+  box-shadow: #333;
+}  
+
+.form-group {  
+  margin-bottom: 1.5rem;  
+  text-align: left;  
+}  
+
+.form-group label {  
+  display: block;  
+  margin-bottom: 0.5rem;  
+  font-size: 1rem;  
+}  
+
+.form-group input,  
+.form-group textarea {  
+  width: 100%;  
+  padding: 0.5rem;  
+  font-size: 1rem;  
+  border: 1px solid #323334;  
+  border-radius: 4px;  
+  background-color: whitesmoke;  
+  color: #ffffff;  
+}  
+
+textarea {  
+  resize: none;  
+}  
+
+.save-btn {  
+  background-color: #dae0e8;  
+  color: #1c1c1c;  
+  padding: 0.7rem 1.5rem;  
+  border: none;  
+  border-radius: 4px;  
+  cursor: pointer;  
+  font-size: 1rem;  
+}  
+
+.save-btn:hover {  
+  background-color: #f4f5f7;  
+}  
+
+.judul {    
+  text-decoration: none;    
+  color: inherit;    
+}  

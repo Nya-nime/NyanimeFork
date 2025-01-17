@@ -1,81 +1,150 @@
-/* Global Styles */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    background-color: #ecf0f1;
-    color: #333;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
+body {  
+    font-family: Arial, sans-serif;  
+    margin: 0;  
+    padding: 0;  
+    display: flex;  
+    justify-content: center;  
+    align-items: center;  
+    height: 100vh;  
+    background: linear-gradient(135deg, #f2f6ff, #e2e8f0);  
+}  
   
-header {
-    text-align: center;
-    margin-bottom: 1rem;
-}
+.container {  
+    display: flex;  
+    background: white;  
+    box-shadow: -4px 4px 8px rgba(0, 0, 0, 0.1), 4px 4px 8px rgba(0, 0, 0, 0.1), 4px 4px 8px rgba(0, 0, 0, 0.1); /* Left, right, and bottom shadow */  
+    border-radius: 8px;  
+    overflow: hidden;  
+    width: 90%; /* Default width for smaller screens */  
+    max-width: 800px;  
+}  
   
-header h1 {
-    font-size: 2rem;
-    color: #2c3e50;
-}
+#gif-container {  
+    width: 100%; /* Make the container take the full width of the left section */  
+    height: 100%; /* Make the container take the full height of the left section */  
+    display: flex;  
+    justify-content: center; /* Center the GIF horizontally */  
+    align-items: center; /* Center the GIF vertically */  
+}  
   
-main {
+#gif-image {  
+    max-width: 100%; /* Ensure the GIF does not exceed the container's width */  
+    max-height: 100%; /* Ensure the GIF does not exceed the container's height */  
+    object-fit: contain; /* Maintain aspect ratio while fitting within the container */  
+    margin-right: auto;  
+}  
+  
+.form-section {  
+    display: flex;  
+    flex-direction: column;  
+    justify-content: center;  
+    padding: 30px;  
+    width: 100%;  
+}  
+  
+h2 {  
+    margin-bottom: 20px; /* Adjusted margin for mobile */  
+    font-size: 22px;  
+    color: #333;  
+    text-align: center; /* Center the title */  
+}  
+  
+.form-group {  
+    margin: 10px 0; /* Adjusted margin for mobile */  
+}  
+  
+.form-group label {  
+    display: block;  
+    margin-bottom: 5px;  
+    color: #666;  
+    text-align: auto; /* Center label text */  
+}  
+  
+.form-group input {  
+    width: 100%;  
+    padding: 15px; /* Adjusted padding for mobile */  
+    font-size: 16px; /* Adjusted font size for mobile */  
+    border: 1px solid #ccc;  
+    border-radius: 4px;  
+    box-sizing: border-box; /* Ensure consistent sizing */  
+    margin-bottom: 15px; /* Adjusted margin for mobile */  
+    text-align: center; /* Center text in input */  
+}  
+  
+.register-btn {  
     width: 100%;
-    max-width: 400px;
-}
+    background: #3196C0;  
+    color: white;  
+    border: none;  
+    padding: 15px 20px; /* Adjusted padding for mobile */  
+    font-size: 16px; /* Consistent font size */  
+    border-radius: 4px;  
+    cursor: pointer;  
+    text-align: center; /* Center text in the button */  
+}  
   
-/* Card Styles */
-form {
-    background-color: #ffffff;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
+.register-btn:hover {  
+    background: #3A5074;  
+}  
   
-form label {
-    font-weight: bold;
-    margin-bottom: 0.5rem;
-    color: #34495e;
-}
+.social-login {  
+    margin-top: 20px;  
+    display: flex;  
+    justify-content: space-around;  
+}  
   
-form input, form select {
-    width: 100%;
-    padding: 0.75rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1rem;
-}
+.social-login button {  
+    background: #f2f2f2;  
+    border: 1px solid #ccc;  
+    padding: 10px 15px;  
+    border-radius: 4px;  
+    cursor: pointer;  
+}  
   
-.register-btn {
-    display: inline-block;
-    padding: 0.75rem;
-    background-color: #2980b9;
-    color: white;
-    text-align: center;
-    text-decoration: none;
-    border-radius: 4px;
-    font-size: 1rem;
-    transition: background-color 0.3s ease;
-    cursor: pointer;
-}
+.social-login button:hover {  
+    background: #e6e6e6;  
+}  
   
-.register-btn:hover {
-    background-color: #3498db;
-}
+/* Responsive Design */  
+@media (max-width: 768px) {  
+    .container {  
+        flex-direction: column; /* Stack sections vertically */  
+        width: 90%;  
+        max-width: 400px;  
+        height: auto;  
+        padding: 20px;  
+        box-sizing: border-box;  
+        margin: 0 auto; /* Center horizontally */  
+    }  
   
-/* Responsive Design */
-@media (min-width: 768px) {
-    header h1 {
-        font-size: 2.5rem;
-    }
+    #gif-container {  
+        display: none; /* Hide GIF on mobile view */  
+    }  
   
-    form {
-        padding: 3rem;
-    }
+    .form-section {  
+        padding: 2px; /* Adjust padding for mobile */  
+    }  
+  
+    .form-group input {  
+        font-size: 14px; /* Adjust font size for inputs */  
+        padding: 12px; /* Adjust padding for inputs */  
+        margin-left: 50;
+        margin-right: -50;
+    }  
+  
+    .register-btn {  
+        width: 100%;
+        font-size: 14px; /* Adjust font size for button */  
+        padding: 12px; /* Adjust padding for button */  
+    }  
+}  
+  
+@media (max-width: 480px) {  
+    header {  
+        padding: 0.8rem 1rem;  
+    }  
+  
+    header h1 {  
+        font-size: 1.2rem;  
+    }  
 }

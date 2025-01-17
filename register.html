@@ -1,27 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Register</title>
-  <link rel="stylesheet" href="assets/style/register.css">
-  <script defer src="assets/javascript/register.js"></script>
-  <link rel="icon" type="image/png" href="assets/images/Nyanime.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Page</title>
+    <link rel="stylesheet" href="assets/style/register.css">
+    <link rel="icon" type="image/png" href="assets/images/Nyanime.png">
 </head>
 <body>
-  <header>
-    <h1>Register</h1>
-  </header>
-  <main>
-    <form id="register-form">
-      <label for="username">Username</label>
-      <input type="text" id="username" name="username" required>
-      <label for="email">Email</label>
-      <input type="email" id="email" name="email" required>
-      <label for="password">Password</label>
-      <input type="password" id="password" name="password" required>
-      <button type="submit">Register</button>
-    </form>
-  </main>
+    <div class="container">
+        <div id="gif-container">  
+            <img id="gif-image" src="assets/images/flaying.gif" alt="Animated GIF">  
+            <p id="error-message" style="display: none;">Maaf, GIF tidak dapat ditemukan.</p>  
+        </div>
+    
+        <div class="form-section">  
+            <h2>Selamat datang, buat akun baru</h2>  
+            <form id="register-form">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" placeholder="Masukkan username" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Contoh: email@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Masukkan kata sandi" required>
+                </div>
+                <form id="registrationForm" onsubmit="redirectToIndex(event)">  
+                    <!-- Other form fields go here -->  
+                    <button type="submit" class="register-btn">Daftar</button>  
+                  </form>  
+                  
+            </form>
+        </div> 
+    </div>
+    <script src="assets/javascript/register.js"></script>
 </body>
 </html>

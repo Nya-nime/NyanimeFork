@@ -12,7 +12,7 @@ registerForm.addEventListener('submit', (event) => {
         headers: {  
             'Content-Type': 'application/json',  
         },  
-        body: JSON.stringify({ username, email, password }), // Hapus role dari body  
+        body: JSON.stringify({ username, email, password }),  
     })  
     .then(response => {  
         if (!response.ok) {  
@@ -22,8 +22,10 @@ registerForm.addEventListener('submit', (event) => {
     })  
     .then(data => {  
         alert('Registration successful! Welcome, ' + data.user.username);  
+        localStorage.setItem('jwtToken', data.token); // Simpan token  
+        localStorage.setItem('userId', data.userId);  
         // Redirect to user home page  
-        window.location.href = 'user_home.html'; // Redirect to user home page  
+        window.location.href = 'user_home.html'; // Redirect ke halaman beranda  
     })  
     .catch(error => {  
         console.error('There was a problem with the fetch operation:', error);  
