@@ -5,14 +5,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const profileButton = document.getElementById('profile');    
     
     // Cek apakah pengguna sudah login    
-    const token = localStorage.getItem('jwtToken');    
+    const token = localStorage.getItem('jwtToken'); 
     if (!token) {    
-        window.location.href = 'login.html'; // Ganti dengan URL halaman login Anda    
-    }    
-    
-    // Load the anime list on page load    
-    loadAnimeList();    
-    
+        window.location.href = 'llogin.html'; // Ganti dengan URL halaman login Anda    
+    }else{
+        loadAnimeList(); 
+    }  
+   
     // Search functionality    
     searchButton.addEventListener('click', () => {    
         const searchTerm = searchBar.value.toLowerCase();    
@@ -31,11 +30,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 'Authorization': `Bearer ${token}`    
             }    
         })    
-        .then(response => {    
-            if (!response.ok) {    
-                throw new Error('Failed to fetch anime');    
-            }    
-            return response.json();    
+        .then(response => {  
+            if (response.status === 401) {  
+                alert('Session expired. Please log in again.');  
+                window.location.href = 'llogin.html';  
+                return;  
+            }  
+            if (!response.ok) {  
+                throw new Error('Failed to fetch anime');  
+            }  
+            return response.json();   
         })    
         .then(data => {    
             adminAnimeList.innerHTML = ''; // Clear previous content    
