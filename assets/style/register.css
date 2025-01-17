@@ -68,7 +68,6 @@ h2 {
     border-radius: 4px;  
     box-sizing: border-box; /* Ensure consistent sizing */  
     margin-bottom: 15px; /* Adjusted margin for mobile */  
-    text-align: center; /* Center text in input */  
 }  
   
 .register-btn {  

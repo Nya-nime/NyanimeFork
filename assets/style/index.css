@@ -126,7 +126,8 @@ main {
 .anime-list {  
   display: flex; /* Use flexbox for horizontal layout */  
   flex-wrap: wrap; /* Allow wrapping to the next line */  
-  gap: 1rem; /* Space between cards */  
+  gap: 1rem; /* Space between cards */ 
+  column-gap: 3rem; 
   justify-content: center; /* Center items on smaller screens */  
 }  
   

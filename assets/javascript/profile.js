@@ -9,11 +9,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const editProfileButton = document.getElementById('editProfileButton'); // Tombol edit profile    
     let currentEditId = null;    
     
-    // Cek apakah pengguna sudah login    
-    // const token = localStorage.getItem('jwtToken');    
-    // if (!token) {    
-    //     window.location.href = 'llogin.html'; // Ganti dengan URL halaman login Anda    
-    // }    
+     //Cek apakah pengguna sudah login    
+    const token = localStorage.getItem('jwtToken');    
+     if (!token) {    
+         window.location.href = 'llogin.html'; // Ganti dengan URL halaman login Anda    
+    }    
     
     // Fetch profile data    
     console.log('Fetching profile data...');    

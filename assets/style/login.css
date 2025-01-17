@@ -97,6 +97,7 @@ label {
 }
 
 .login-btn {
+  width: 100%;
   background: #3196C0;
   color: white;
   border: none;
